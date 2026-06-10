@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEINEKEN Vietnam – Waste Analytics 2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --green: #1D9E75; --green-light: #EAF3DE; --green-dark: #0F6E56;
+    --blue: #378ADD; --blue-light: #E6F1FB;
+    --amber: #BA7517; --amber-light: #FAEEDA; --amber-mid: #EF9F27;
+    --red: #E24B4A; --red-light: #FCEBEB;
+    --gray: #888780; --gray-light: #F1EFE8; --gray-dark: #444441;
+    --purple: #7F77DD; --purple-light: #EEEDFE;
+    --teal: #1D9E75; --teal-light: #E1F5EE;
+    --text: #2C2C2A; --text-muted: #5F5E5A; --text-light: #888780;
+    --border: #D3D1C7; --bg: #F8F7F4; --white: #FFFFFF;
+    --radius: 12px; --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-left {}
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .logo-badge {
+    background: var(--green);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--text); }
+  .header .sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .btn-export {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .btn-export:hover { background: var(--green-dark); }
+  .btn-export svg { width: 16px; height: 16px; }
+
+  /* SECTION TITLE */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    margin-top: 32px;
+  }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .kpi {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+  .kpi .label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .kpi .value { font-size: 24px; font-weight: 700; }
+  .kpi .delta { font-size: 12px; margin-top: 4px; color: var(--text-muted); }
+  .kpi.green .value { color: var(--green-dark); }
+  .kpi.amber .value { color: var(--amber); }
+  .kpi.red   .value { color: var(--red); }
+  .kpi.blue  .value { color: var(--blue); }
+
+  /* CHART CARDS */
+  .chart-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .chart-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .chart-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .chart-card.full { grid-column: 1 / -1; }
+  .chart-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .chart-card .chart-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .chart-wrap { position: relative; width: 100%; }
+
+  /* INSIGHT PILLS */
+  .insight-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .insight-pill {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .pill-green { background: var(--green-light); color: var(--green-dark); }
+  .pill-amber { background: var(--amber-light); color: var(--amber); }
+  .pill-red   { background: var(--red-light);   color: var(--red); }
+  .pill-blue  { background: var(--blue-light);  color: var(--blue); }
+  .pill-gray  { background: var(--gray-light);  color: var(--gray-dark); }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  /* ANNOTATION TABLE */
+  .insight-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .insight-table th {
+    background: var(--bg);
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .insight-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .insight-table tr:last-child td { border-bottom: none; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-green { background: var(--green-light); color: var(--green-dark); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-red   { background: var(--red-light);   color: var(--red); }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 700px) {
+    .chart-grid-2, .chart-grid-3 { grid-template-columns: 1fr; }
+    .chart-card.full { grid-column: auto; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .btn-export { display: none; }
+    .page { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="main-page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-row">
+        <span class="logo-badge">HEINEKEN Vietnam</span>
+        <span style="color:var(--text-muted);font-size:12px;">Hanoi Brewery</span>
+      </div>
+      <h1>Waste & Co-product Analytics 2024</h1>
+      <div class="sub">Dữ liệu phân tích phế phẩm và phụ phẩm sản xuất bia — Nhà máy Hà Nội</div>
+    </div>
+    <button class="btn-export" onclick="window.print()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download / Print PDF
+    </button>
+  </div>
+
+  <!-- KPIs -->
+  <div class="section-label">Tổng quan năm 2024</div>
+  <div class="kpi-grid">
+    <div class="kpi green">
+      <div class="label">Tổng phế phẩm</div>
+      <div class="value">20.9M kg</div>
+      <div class="delta">Toàn bộ được xử lý có ích</div>
+    </div>
+    <div class="kpi green">
+      <div class="label">Animal feed (avg)</div>
+      <div class="value">82.5%</div>
+      <div class="delta">Nguồn phụ phẩm chủ lực</div>
+    </div>
+    <div class="kpi amber">
+      <div class="label">Waste intensity avg</div>
+      <div class="value">17.5 kg/hl</div>
+      <div class="delta">Dao động 15.4 – 20.2 kg/hl</div>
+    </div>
+    <div class="kpi blue">
+      <div class="label">Materials recovery</div>
+      <div class="value">15.5%</div>
+      <div class="delta">Vật liệu tái chế / tái sử dụng</div>
+    </div>
+    <div class="kpi green">
+      <div class="label">Landfill rate</div>
+      <div class="value">≈ 0%</div>
+      <div class="delta">Zero waste to landfill 6/6 sites</div>
+    </div>
+    <div class="kpi green">
+      <div class="label">Combust. w/ energy</div>
+      <div class="value">↑ từ T5</div>
+      <div class="delta">Chuyển đổi từ non-recovery</div>
+    </div>
+  </div>
+
+  <!-- CHART ROW 1: Stacked + Donut -->
+  <div class="section-label">Phân bổ khối lượng theo tháng</div>
+  <div class="chart-grid-2">
+
+    <div class="chart-card">
+      <h3>Khối lượng phế phẩm tổng hàng tháng</h3>
+      <div class="chart-sub">Stacked bar — phân tích từng loại (kg)</div>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#1D9E75"></span>Animal feed</span>
+        <span><span class="legend-dot" style="background:#378ADD"></span>Materials</span>
+        <span><span class="legend-dot" style="background:#EF9F27"></span>Combust. w/ energy</span>
+        <span><span class="legend-dot" style="background:#E24B4A"></span>Combust. w/o energy</span>
+        <span><span class="legend-dot" style="background:#888780"></span>Reuse</span>
+      </div>
+      <div class="chart-wrap" style="height:240px">
+        <canvas id="c-stacked" role="img" aria-label="Monthly waste stacked bar chart"></canvas>
+      </div>
+      <div class="insight-row">
+        <span class="insight-pill pill-green">Tháng 11–12 cao nhất</span>
+        <span class="insight-pill pill-amber">Tháng 7 thấp nhất</span>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Tỷ lệ phân bổ cả năm 2024</h3>
+      <div class="chart-sub">Donut — tổng hợp 12 tháng</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="c-donut" role="img" aria-label="Annual waste composition donut chart"></canvas>
+      </div>
+      <div id="donut-legend" style="margin-top:12px;display:flex;flex-direction:column;gap:5px;font-size:12px;"></div>
+    </div>
+  </div>
+
+  <!-- CHART ROW 2: NEW INSIGHTS -->
+  <div class="section-label">Insight mới — 3 phát hiện quan trọng</div>
+  <div class="chart-grid-3">
+
+    <!-- INSIGHT 1: Combustion shift -->
+    <div class="chart-card">
+      <h3>Chuyển đổi combustion ♻️</h3>
+      <div class="chart-sub">Từ non-recovery → energy recovery (T5 là pivot)</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="c-combustion" role="img" aria-label="Combustion with and without energy recovery by month"></canvas>
+      </div>
+      <div class="insight-row">
+        <span class="insight-pill pill-green">Tháng 5: pivot point</span>
+        <span class="insight-pill pill-blue">≈ 100% shift từ T7</span>
+      </div>
+    </div>
+
+    <!-- INSIGHT 2: Waste intensity vs production proxy -->
+    <div class="chart-card">
+      <h3>Waste intensity theo tháng</h3>
+      <div class="chart-sub">kg/hl — cao điểm T3, T9, T11; thấp T7, T12</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="c-intensity" role="img" aria-label="Waste intensity per hectoliter by month"></canvas>
+      </div>
+      <div class="insight-row">
+        <span class="insight-pill pill-amber">T11 cao nhất: 20.2</span>
+        <span class="insight-pill pill-green">T7 thấp nhất: 15.4</span>
+      </div>
+    </div>
+
+    <!-- INSIGHT 3: Animal feed % trend -->
+    <div class="chart-card">
+      <h3>Animal feed % — xu hướng năm</h3>
+      <div class="chart-sub">Tỷ lệ animal feed biến động do composition thay đổi</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="c-aftrend" role="img" aria-label="Animal feed percentage trend by month"></canvas>
+      </div>
+      <div class="insight-row">
+        <span class="insight-pill pill-green">T12 đỉnh: 89.4%</span>
+        <span class="insight-pill pill-amber">T3 thấp: 78.3%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART ROW 3: NEW INSIGHTS CONTINUED -->
+  <div class="chart-grid-2" style="margin-top:16px">
+
+    <!-- INSIGHT 4: Radar / Spider — waste profile by quarter -->
+    <div class="chart-card">
+      <h3>So sánh cấu trúc phế phẩm theo quý</h3>
+      <div class="chart-sub">Radar chart — xem từng quý nghiêng về loại nào</div>
+      <div class="legend" style="margin-bottom:8px">
+        <span><span class="legend-dot" style="background:#1D9E75;border-radius:50%"></span>Q1</span>
+        <span><span class="legend-dot" style="background:#378ADD;border-radius:50%"></span>Q2</span>
+        <span><span class="legend-dot" style="background:#EF9F27;border-radius:50%"></span>Q3</span>
+        <span><span class="legend-dot" style="background:#E24B4A;border-radius:50%"></span>Q4</span>
+      </div>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="c-radar" role="img" aria-label="Radar chart of waste composition by quarter"></canvas>
+      </div>
+      <div class="insight-row">
+        <span class="insight-pill pill-blue">Q1 &amp; Q4 giống nhau nhất</span>
+        <span class="insight-pill pill-amber">Q2–Q3: materials cao hơn</span>
+      </div>
+    </div>
+
+    <!-- INSIGHT 5: Efficiency opportunity — animal feed vs materials -->
+    <div class="chart-card">
+      <h3>Tổng phế phẩm vs. Waste intensity</h3>
+      <div class="chart-sub">Bubble chart — size = total volume, trục Y = intensity</div>
+      <div class="chart-wrap" style="height:280px">
+        <canvas id="c-bubble" role="img" aria-label="Bubble chart total waste volume vs intensity by month"></canvas>
+      </div>
+      <div class="insight-row">
+        <span class="insight-pill pill-green">Sản lượng cao ≠ intensity cao</span>
+        <span class="insight-pill pill-amber">T3: volume lớn + intensity cao</span>
+        <span class="insight-pill pill-blue">T7: volume nhỏ + hiệu quả nhất</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHT TABLE -->
+  <div class="section-label">Bảng tổng hợp insight & khuyến nghị</div>
+  <div class="chart-card full">
+    <h3>Key findings & action points</h3>
+    <div class="chart-sub">Dựa trên phân tích dữ liệu 2024 — Nhà máy Hà Nội</div>
+    <table class="insight-table">
+      <thead>
+        <tr>
+          <th>Insight</th>
+          <th>Phát hiện</th>
+          <th>Impact</th>
+          <th>Khuyến nghị</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Combustion shift T5</strong></td>
+          <td>Từ tháng 5, combustion without energy gần về 0; energy recovery tăng lên ~2% ổn định</td>
+          <td><span class="badge badge-green">Tích cực</span></td>
+          <td>Document milestone này trong sustainability report; mở rộng sang các site khác</td>
+        </tr>
+        <tr>
+          <td><strong>Waste intensity spike T3 & T11</strong></td>
+          <td>Tháng 3 và 11 có intensity cao nhất (19.1 và 20.2 kg/hl) — trùng với cao điểm sản xuất Tết + cuối năm</td>
+          <td><span class="badge badge-amber">Cần theo dõi</span></td>
+          <td>Kiểm tra operational efficiency tháng cao điểm; benchmark với các brewery khác</td>
+        </tr>
+        <tr>
+          <td><strong>Materials recovery biến động mạnh</strong></td>
+          <td>Materials fluctuate 9% (T12) đến 20.6% (T3) — dao động gấp đôi trong năm</td>
+          <td><span class="badge badge-amber">Cần điều tra</span></td>
+          <td>Xác định nguyên nhân tháng 3 cao bất thường (thay đổi quy trình? batch đặc biệt?)</td>
+        </tr>
+        <tr>
+          <td><strong>Animal feed dominance</strong></td>
+          <td>82–89% toàn bộ phế phẩm là animal feed — nhất quán và ổn định cả năm</td>
+          <td><span class="badge badge-green">Ổn định</span></td>
+          <td>Scale BSF (Black Soldier Fly) farming để tăng value từ cùng nguồn spent grain/yeast</td>
+        </tr>
+        <tr>
+          <td><strong>T7 — best efficiency month</strong></td>
+          <td>Tháng 7: waste intensity thấp nhất (15.4 kg/hl) đồng thời volume vừa phải</td>
+          <td><span class="badge badge-green">Best practice</span></td>
+          <td>Phân tích process T7 làm baseline để cải thiện các tháng khác</td>
+        </tr>
+        <tr>
+          <td><strong>Zero landfill — maintained</strong></td>
+          <td>Chỉ có 19 kg vào landfill cả năm (tháng 2), toàn bộ còn lại được xử lý có ích</td>
+          <td><span class="badge badge-green">Xuất sắc</span></td>
+          <td>Duy trì và report như KPI flagship trong EverGreen 2025 strategy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>HEINEKEN Vietnam — Hanoi Brewery · Waste & Co-product Report 2024</span>
+    <span>Generated: June 2025 · Data source: HVN Internal waste tracking system</span>
+  </div>
+
+</div>
+
+<script>
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const AF  = [1371850,1124050,1523180,1513770,1010480,1085020,1128630,1343930,1488390,1668100,1833200,1830570];
+const MAT = [226573,134753,400537,353492,260136,302648,237395,317809,299391,275518,331137,185550];
+const CE  = [0,0,0,0,20754,25406,33961,29647,28641,25442,24723,29640];
+const CN  = [15686,24062,21001,31659,579,729,634,1394,501,1201,934,513];
+const RU  = [2893,1425,718,1885,491,1951,676,1936,830,2009,1786,1587];
+const INT = [17.4,16.1,19.1,18.2,18.5,17.7,15.4,18.2,19.4,16.3,20.2,15.9];
+const TOTALS = months.map((_,i) => AF[i]+MAT[i]+CE[i]+CN[i]+RU[i]);
+const gridC = 'rgba(0,0,0,0.06)';
+const tickC = '#888780';
+
+/* ── 1. STACKED BAR ── */
+new Chart(document.getElementById('c-stacked'), {
+  type: 'bar',
+  data: { labels: months, datasets: [
+    { label:'Animal feed', data:AF,  backgroundColor:'#1D9E75', stack:'s' },
+    { label:'Materials',   data:MAT, backgroundColor:'#378ADD', stack:'s' },
+    { label:'Combust. w/ energy', data:CE, backgroundColor:'#EF9F27', stack:'s' },
+    { label:'Combust. w/o energy', data:CN, backgroundColor:'#E24B4A', stack:'s' },
+    { label:'Reuse', data:RU, backgroundColor:'#888780', stack:'s' },
+  ]},
+  options: { responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${(c.raw/1000).toFixed(0)}k kg` }}},
+    scales:{
+      x:{ stacked:true, ticks:{color:tickC,font:{size:10}}, grid:{color:gridC} },
+      y:{ stacked:true, ticks:{color:tickC,font:{size:10}, callback:v=>(v/1000000).toFixed(1)+'M'}, grid:{color:gridC} }
+    }
+  }
+});
+
+/* ── 2. DONUT ── */
+const annualTotals = [AF,MAT,CE,CN,RU].map(a=>a.reduce((s,v)=>s+v,0));
+const grandTotal = annualTotals.reduce((a,b)=>a+b,0);
+const cats = ['Animal feed','Materials','Combust. w/ energy','Combust. w/o energy','Reuse'];
+const colors = ['#1D9E75','#378ADD','#EF9F27','#E24B4A','#888780'];
+new Chart(document.getElementById('c-donut'), {
+  type:'doughnut',
+  data:{ labels:cats, datasets:[{ data:annualTotals, backgroundColor:colors, borderWidth:0, hoverOffset:6 }]},
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'68%',
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.label}: ${((c.raw/grandTotal)*100).toFixed(1)}%` }}}
+  }
+});
+const dl = document.getElementById('donut-legend');
+cats.forEach((cat,i)=>{
+  const pct = ((annualTotals[i]/grandTotal)*100).toFixed(1);
+  const row = document.createElement('div');
+  row.style.cssText='display:flex;align-items:center;justify-content:space-between;font-size:12px;';
+  row.innerHTML=`<span style="display:flex;align-items:center;gap:5px;color:#5F5E5A"><span style="width:9px;height:9px;border-radius:2px;background:${colors[i]};display:inline-block;"></span>${cat}</span><strong style="color:#2C2C2A">${pct}%</strong>`;
+  dl.appendChild(row);
+});
+
+/* ── 3. COMBUSTION SHIFT ── */
+new Chart(document.getElementById('c-combustion'), {
+  type:'bar',
+  data:{ labels:months, datasets:[
+    { label:'With energy recovery', data:CE, backgroundColor:'#1D9E75', stack:'c' },
+    { label:'Without energy recovery', data:CN, backgroundColor:'#E24B4A', stack:'c' },
+  ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${(c.raw/1000).toFixed(1)}k kg` }}},
+    scales:{
+      x:{ stacked:true, ticks:{color:tickC,font:{size:10}}, grid:{color:gridC} },
+      y:{ stacked:true, ticks:{color:tickC,font:{size:10}, callback:v=>(v/1000).toFixed(0)+'k'}, grid:{color:gridC} }
+    }
+  }
+});
+
+/* ── 4. WASTE INTENSITY ── */
+new Chart(document.getElementById('c-intensity'), {
+  type:'line',
+  data:{ labels:months, datasets:[{
+    label:'kg/hl', data:INT,
+    borderColor:'#BA7517', backgroundColor:'rgba(186,117,23,0.08)',
+    borderWidth:2.5, tension:0.35, fill:true,
+    pointBackgroundColor: INT.map(v => v===Math.min(...INT)?'#1D9E75': v===Math.max(...INT)?'#E24B4A':'#BA7517'),
+    pointRadius: INT.map(v => (v===Math.min(...INT)||v===Math.max(...INT))?6:4),
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw} kg/hl` }}},
+    scales:{
+      x:{ ticks:{color:tickC,font:{size:10}}, grid:{color:gridC} },
+      y:{ min:14, max:21, ticks:{color:tickC,font:{size:10}, callback:v=>v+' kg/hl'}, grid:{color:gridC} }
+    }
+  }
+});
+
+/* ── 5. ANIMAL FEED % TREND ── */
+const afPct = months.map((_,i)=>parseFloat(((AF[i]/TOTALS[i])*100).toFixed(1)));
+new Chart(document.getElementById('c-aftrend'), {
+  type:'line',
+  data:{ labels:months, datasets:[{
+    label:'Animal feed %', data:afPct,
+    borderColor:'#1D9E75', backgroundColor:'rgba(29,158,117,0.07)',
+    borderWidth:2.5, tension:0.3, fill:true,
+    pointBackgroundColor:'#1D9E75', pointRadius:4,
+  }]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw}%` }}},
+    scales:{
+      x:{ ticks:{color:tickC,font:{size:10}}, grid:{color:gridC} },
+      y:{ min:76, max:92, ticks:{color:tickC,font:{size:10}, callback:v=>v+'%'}, grid:{color:gridC} }
+    }
+  }
+});
+
+/* ── 6. RADAR — by QUARTER ── */
+function qAvgPct(months_idx, arr) {
+  const sub = months_idx.map(i=>arr[i]);
+  const subT = months_idx.map(i=>TOTALS[i]);
+  const total = subT.reduce((a,b)=>a+b,0);
+  return parseFloat(((sub.reduce((a,b)=>a+b,0)/total)*100).toFixed(1));
+}
+const Q1=[0,1,2], Q2=[3,4,5], Q3=[6,7,8], Q4=[9,10,11];
+const datasets_arr = [AF,MAT,CE,CN,RU];
+const radarLabels = ['Animal\nfeed','Materials','Combust.\nw/ energy','Combust.\nw/o energy','Reuse'];
+function qData(qi){ return datasets_arr.map(arr=>qAvgPct(qi,arr)); }
+new Chart(document.getElementById('c-radar'), {
+  type:'radar',
+  data:{ labels:['Animal feed','Materials','Combust. w/ E','Combust. w/o E','Reuse'],
+    datasets:[
+      { label:'Q1', data:qData(Q1), borderColor:'#1D9E75', backgroundColor:'rgba(29,158,117,0.1)', pointBackgroundColor:'#1D9E75', borderWidth:1.5 },
+      { label:'Q2', data:qData(Q2), borderColor:'#378ADD', backgroundColor:'rgba(55,138,221,0.1)', pointBackgroundColor:'#378ADD', borderWidth:1.5 },
+      { label:'Q3', data:qData(Q3), borderColor:'#EF9F27', backgroundColor:'rgba(239,159,39,0.1)', pointBackgroundColor:'#EF9F27', borderWidth:1.5 },
+      { label:'Q4', data:qData(Q4), borderColor:'#E24B4A', backgroundColor:'rgba(226,75,74,0.1)', pointBackgroundColor:'#E24B4A', borderWidth:1.5 },
+    ]},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: ${c.raw}%` }}},
+    scales:{ r:{ beginAtZero:true, max:90, ticks:{stepSize:20,color:tickC,font:{size:10},backdropColor:'transparent'}, grid:{color:gridC}, pointLabels:{color:tickC,font:{size:11}} }}
+  }
+});
+
+/* ── 7. BUBBLE — total volume vs intensity ── */
+const monthColors = ['#1D9E75','#378ADD','#EF9F27','#E24B4A','#888780','#7F77DD',
+                     '#D85A30','#639922','#D4537E','#BA7517','#5DCAA5','#185FA5'];
+new Chart(document.getElementById('c-bubble'), {
+  type:'bubble',
+  data:{ datasets: months.map((m,i)=>({
+    label: m,
+    data:[{ x:i+1, y:INT[i], r: Math.sqrt(TOTALS[i]/1000000)*18 }],
+    backgroundColor: monthColors[i]+'BB',
+    borderColor: monthColors[i],
+    borderWidth:1.5,
+  }))},
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{display:false},
+      tooltip:{ callbacks:{
+        label: c => {
+          const i=c.datasetIndex;
+          return [` ${months[i]}`, ` Intensity: ${INT[i]} kg/hl`, ` Total: ${(TOTALS[i]/1000000).toFixed(2)}M kg`];
+        }
+      }}
+    },
+    scales:{
+      x:{ min:0, max:13, ticks:{color:tickC,font:{size:10}, callback:v=>months[v-1]||''}, grid:{color:gridC} },
+      y:{ min:14, max:22, ticks:{color:tickC,font:{size:10}, callback:v=>v+' kg/hl'}, grid:{color:gridC},
+        title:{display:true,text:'Waste intensity (kg/hl)',color:tickC,font:{size:11}} }
+    }
+  }
+});
+</script>
+</body>
+</html>
