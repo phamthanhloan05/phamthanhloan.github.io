@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEINEKEN Vietnam – Waste Analytics 2024</title>
+<title>HEINEKEN Vietnam – Waste Analytics 2025</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
   :root {
@@ -256,8 +256,8 @@
         <span class="logo-badge">HEINEKEN Vietnam</span>
         <span style="color:var(--text-muted);font-size:12px;">Hanoi Brewery</span>
       </div>
-      <h1>Waste & Co-product Analytics 2024</h1>
-      <div class="sub">Dữ liệu phân tích phế phẩm và phụ phẩm sản xuất bia — Nhà máy Hà Nội</div>
+      <h1>Waste & Co-product Analysis 2025</h1>
+      <div class="sub">Báo cáo phân tích chất thải và phụ phẩm của Nhà máy HEINEKEN Hà Nội năm 2025</div>
     </div>
     <button class="btn-export" onclick="window.print()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -270,32 +270,32 @@
   </div>
 
   <!-- KPIs -->
-  <div class="section-label">Tổng quan năm 2024</div>
+  <div class="section-label">Tổng quan năm 2025</div>
   <div class="kpi-grid">
     <div class="kpi green">
       <div class="label">Tổng phế phẩm</div>
-      <div class="value">20.9M kg</div>
+      <div class="value">20.6M kg</div>
       <div class="delta">Toàn bộ được xử lý có ích</div>
     </div>
     <div class="kpi green">
-      <div class="label">Animal feed (avg)</div>
-      <div class="value">82.5%</div>
+      <div class="label">Animal feed</div>
+      <div class="value">82.2%</div>
       <div class="delta">Nguồn phụ phẩm chủ lực</div>
     </div>
     <div class="kpi amber">
-      <div class="label">Waste intensity avg</div>
-      <div class="value">17.5 kg/hl</div>
+      <div class="label">Waste intensity (avg)</div>
+      <div class="value">17.7 kg/hl</div>
       <div class="delta">Dao động 15.4 – 20.2 kg/hl</div>
     </div>
     <div class="kpi blue">
       <div class="label">Materials recovery</div>
-      <div class="value">15.5%</div>
+      <div class="value">16.2%</div>
       <div class="delta">Vật liệu tái chế / tái sử dụng</div>
     </div>
     <div class="kpi green">
       <div class="label">Landfill rate</div>
       <div class="value">≈ 0%</div>
-      <div class="delta">Zero waste to landfill 6/6 sites</div>
+      <div class="delta">Zero waste to landfill</div>
     </div>
     <div class="kpi green">
       <div class="label">Combust. w/ energy</div>
@@ -323,12 +323,12 @@
       </div>
       <div class="insight-row">
         <span class="insight-pill pill-green">Tháng 11–12 cao nhất</span>
-        <span class="insight-pill pill-amber">Tháng 7 thấp nhất</span>
+        <span class="insight-pill pill-amber">Tháng 5-7 thấp nhất</span>
       </div>
     </div>
 
     <div class="chart-card">
-      <h3>Tỷ lệ phân bổ cả năm 2024</h3>
+      <h3>Tỷ lệ phân bổ cả năm 2025</h3>
       <div class="chart-sub">Donut — tổng hợp 12 tháng</div>
       <div class="chart-wrap" style="height:200px">
         <canvas id="c-donut" role="img" aria-label="Annual waste composition donut chart"></canvas>
@@ -338,13 +338,13 @@
   </div>
 
   <!-- CHART ROW 2: NEW INSIGHTS -->
-  <div class="section-label">Insight mới — 3 phát hiện quan trọng</div>
+  <div class="section-label">Insights</div>
   <div class="chart-grid-3">
 
     <!-- INSIGHT 1: Combustion shift -->
     <div class="chart-card">
-      <h3>Chuyển đổi combustion ♻️</h3>
-      <div class="chart-sub">Từ non-recovery → energy recovery (T5 là pivot)</div>
+      <h3>Chuyển đổi combustion </h3>
+      <div class="chart-sub">Từ non-energy recovery → energy recovery (T5 là pivot)</div>
       <div class="chart-wrap" style="height:200px">
         <canvas id="c-combustion" role="img" aria-label="Combustion with and without energy recovery by month"></canvas>
       </div>
@@ -356,8 +356,8 @@
 
     <!-- INSIGHT 2: Waste intensity vs production proxy -->
     <div class="chart-card">
-      <h3>Waste intensity theo tháng</h3>
-      <div class="chart-sub">kg/hl — cao điểm T3, T9, T11; thấp T7, T12</div>
+      <h3>Waste intensity theo tháng (kg/hl)</h3>
+      <div class="chart-sub"> cao điểm T3, T9, T11; thấp T7, T12</div>
       <div class="chart-wrap" style="height:200px">
         <canvas id="c-intensity" role="img" aria-label="Waste intensity per hectoliter by month"></canvas>
       </div>
@@ -369,14 +369,14 @@
 
     <!-- INSIGHT 3: Animal feed % trend -->
     <div class="chart-card">
-      <h3>Animal feed % — xu hướng năm</h3>
+      <h3>Animal feed %</h3>
       <div class="chart-sub">Tỷ lệ animal feed biến động do composition thay đổi</div>
       <div class="chart-wrap" style="height:200px">
         <canvas id="c-aftrend" role="img" aria-label="Animal feed percentage trend by month"></canvas>
       </div>
       <div class="insight-row">
         <span class="insight-pill pill-green">T12 đỉnh: 89.4%</span>
-        <span class="insight-pill pill-amber">T3 thấp: 78.3%</span>
+        <span class="insight-pill pill-amber">T6 đáy: 76.6%</span>
       </div>
     </div>
   </div>
@@ -406,23 +406,23 @@
     <!-- INSIGHT 5: Efficiency opportunity — animal feed vs materials -->
     <div class="chart-card">
       <h3>Tổng phế phẩm vs. Waste intensity</h3>
-      <div class="chart-sub">Bubble chart — size = total volume, trục Y = intensity</div>
+      <div class="chart-sub">Bubble chart: size = total volume, trục Y = intensity</div>
       <div class="chart-wrap" style="height:280px">
         <canvas id="c-bubble" role="img" aria-label="Bubble chart total waste volume vs intensity by month"></canvas>
       </div>
       <div class="insight-row">
         <span class="insight-pill pill-green">Sản lượng cao ≠ intensity cao</span>
         <span class="insight-pill pill-amber">T3: volume lớn + intensity cao</span>
-        <span class="insight-pill pill-blue">T7: volume nhỏ + hiệu quả nhất</span>
+        <span class="insight-pill pill-blue">T7: lowest waste intensity despite a considerable waste volume</span>
       </div>
     </div>
   </div>
 
   <!-- INSIGHT TABLE -->
-  <div class="section-label">Bảng tổng hợp insight & khuyến nghị</div>
+  <div class="section-label">Bảng tổng hợp insight & đề xuất khuyến nghị</div>
   <div class="chart-card full">
-    <h3>Key findings & action points</h3>
-    <div class="chart-sub">Dựa trên phân tích dữ liệu 2024 — Nhà máy Hà Nội</div>
+    <h3>Key findings & recommendations</h3>
+    <div class="chart-sub">Dựa trên phân tích dữ liệu 2025 — Nhà máy Hà Nội</div>
     <table class="insight-table">
       <thead>
         <tr>
@@ -434,20 +434,20 @@
       </thead>
       <tbody>
         <tr>
-          <td><strong>Combustion shift T5</strong></td>
-          <td>Từ tháng 5, combustion without energy gần về 0; energy recovery tăng lên ~2% ổn định</td>
+          <td><strong>Combustion shift since May 2025</strong></td>
+          <td>Từ tháng 5, combustion without energy gần về 0; energy recovery tăng lên around 2%, tương đối ổn định</td>
           <td><span class="badge badge-green">Tích cực</span></td>
-          <td>Document milestone này trong sustainability report; mở rộng sang các site khác</td>
+          <td>Tiếp tục nâng cao tỷ lệ thu hồi năng lượng bằng cách chuyển đổi nhiều loại chất thải có khả năng cháy thành năng lượng thay vì xử lý theo hình thức thải bỏ. Duy trì mức gần như bằng 0 đối với hoạt động đốt chất thải không thu hồi năng lượng thông qua việc giám sát liên tục và tối ưu hóa quy trình xử lý</td>
         </tr>
         <tr>
           <td><strong>Waste intensity spike T3 & T11</strong></td>
           <td>Tháng 3 và 11 có intensity cao nhất (19.1 và 20.2 kg/hl) — trùng với cao điểm sản xuất Tết + cuối năm</td>
           <td><span class="badge badge-amber">Cần theo dõi</span></td>
-          <td>Kiểm tra operational efficiency tháng cao điểm; benchmark với các brewery khác</td>
+          <td>Tăng cường giám sát chất thải, bảo trì phòng ngừa và tối ưu hóa kế hoạch sản xuất trong các giai đoạn cao điểm để giảm tình trạng gia tăng waste intensity</td>
         </tr>
         <tr>
           <td><strong>Materials recovery biến động mạnh</strong></td>
-          <td>Materials fluctuate 9% (T12) đến 20.6% (T3) — dao động gấp đôi trong năm</td>
+          <td>Materials fluctuate 9% (T12) với 20.6% (T3) — dao động gấp đôi trong năm</td>
           <td><span class="badge badge-amber">Cần điều tra</span></td>
           <td>Xác định nguyên nhân tháng 3 cao bất thường (thay đổi quy trình? batch đặc biệt?)</td>
         </tr>
@@ -455,7 +455,7 @@
           <td><strong>Animal feed dominance</strong></td>
           <td>82–89% toàn bộ phế phẩm là animal feed — nhất quán và ổn định cả năm</td>
           <td><span class="badge badge-green">Ổn định</span></td>
-          <td>Scale BSF (Black Soldier Fly) farming để tăng value từ cùng nguồn spent grain/yeast</td>
+          <td>Duy trì hệ thống thu hồi phụ phẩm làm thức ăn chăn nuôi, đồng thời nghiên cứu thêm các phương án tận dụng có giá trị gia tăng cao để đa dạng hóa mô hình kinh tế tuần hoàn</td>
         </tr>
         <tr>
           <td><strong>T7 — best efficiency month</strong></td>
@@ -467,7 +467,7 @@
           <td><strong>Zero landfill — maintained</strong></td>
           <td>Chỉ có 19 kg vào landfill cả năm (tháng 2), toàn bộ còn lại được xử lý có ích</td>
           <td><span class="badge badge-green">Xuất sắc</span></td>
-          <td>Duy trì và report như KPI flagship trong EverGreen 2025 strategy</td>
+          <td>Duy trì thành tích zero landfill thông qua giám sát liên tục, đồng thời tiếp tục nâng cao hiệu quả phân loại và thu hồi tài nguyên từ chất thải</td>
         </tr>
       </tbody>
     </table>
@@ -475,8 +475,8 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    <span>HEINEKEN Vietnam — Hanoi Brewery · Waste & Co-product Report 2024</span>
-    <span>Generated: June 2025 · Data source: HVN Internal waste tracking system</span>
+    <span>HEINEKEN Vietnam — Hanoi Brewery · Waste & Co-product Report 2025</span>
+    <span>Generated: June 2025 · Data source: HVNHN Internal waste tracking system</span>
   </div>
 
 </div>
