@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEINEKEN Vietnam – Hanoi Brewery · Waste & Co-product Report 2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --g:#1D9E75;--gL:#EAF3DE;--gD:#085041;--gM:#5DCAA5;
+    --b:#378ADD;--bL:#E6F1FB;--bD:#0C447C;
+    --a:#BA7517;--aL:#FAEEDA;--am:#EF9F27;
+    --r:#E24B4A;--rL:#FCEBEB;
+    --p:#7F77DD;--pL:#EEEDFE;
+    --o:#D85A30;--oL:#FAEAE1;
+    --gr:#888780;--grL:#F1EFE8;--grD:#444441;
+    --t:#1C1C1A;--tm:#5F5E5A;--tl:#888780;
+    --bd:#D3D1C7;--bg:#F8F7F4;--w:#fff;
+    --rad:12px;--rads:8px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t);font-size:14px;line-height:1.6}
+  .page{max-width:1160px;margin:0 auto;padding:32px 24px 80px}
+
+  /* HEADER */
+  .hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--bd)}
+  .hdr-left{}
+  .badge-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .badge{background:var(--g);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:20px;text-transform:uppercase}
+  .badge-sub{color:var(--tm);font-size:12px}
+  .hdr h1{font-size:22px;font-weight:700;margin-bottom:3px}
+  .hdr .sub{font-size:13px;color:var(--tm)}
+  .btn{background:var(--g);color:#fff;border:none;padding:10px 20px;border-radius:var(--rads);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:background .2s;text-decoration:none}
+  .btn:hover{background:var(--gD)}
+  .btn svg{width:16px;height:16px;flex-shrink:0}
+
+  /* SECTION LABEL */
+  .sec{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--tl);margin:40px 0 14px;display:flex;align-items:center;gap:10px}
+  .sec::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+  /* GRIDS */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .full{grid-column:1/-1}
+
+  /* CARD */
+  .card{background:var(--w);border:1px solid var(--bd);border-radius:var(--rad);padding:20px}
+  .card h3{font-size:14px;font-weight:600;margin-bottom:3px}
+  .card .csub{font-size:12px;color:var(--tm);margin-bottom:14px}
+  .cw{position:relative;width:100%}
+
+  /* KPI */
+  .kpi{background:var(--w);border:1px solid var(--bd);border-radius:var(--rad);padding:16px 18px}
+  .kpi .lbl{font-size:12px;color:var(--tm);margin-bottom:5px}
+  .kpi .val{font-size:22px;font-weight:700;line-height:1.1}
+  .kpi .note{font-size:11px;color:var(--tl);margin-top:4px}
+  .kpi.g .val{color:var(--gD)} .kpi.a .val{color:var(--a)} .kpi.r .val{color:var(--r)}
+  .kpi.b .val{color:var(--bD)} .kpi.p .val{color:var(--p)} .kpi.o .val{color:var(--o)}
+
+  /* LEGEND */
+  .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;font-size:12px;color:var(--tm)}
+  .leg span{display:flex;align-items:center;gap:5px}
+  .ld{width:10px;height:10px;border-radius:2px;display:inline-block;flex-shrink:0}
+
+  /* PILLS */
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .pill{font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px}
+  .pg{background:var(--gL);color:var(--gD)} .pa{background:var(--aL);color:var(--a)}
+  .pr{background:var(--rL);color:var(--r)} .pb{background:var(--bL);color:var(--bD)}
+  .pp{background:var(--pL);color:var(--p)} .pgr{background:var(--grL);color:var(--grD)}
+  .po{background:var(--oL);color:var(--o)}
+
+  /* INSIGHT BOX */
+  .ibox{background:var(--gL);border-left:3px solid var(--g);border-radius:0 var(--rads) var(--rads) 0;padding:12px 14px;font-size:13px;color:var(--gD);margin-top:12px;line-height:1.5}
+  .ibox.amber{background:var(--aL);border-color:var(--am);color:var(--a)}
+  .ibox.red{background:var(--rL);border-color:var(--r);color:var(--r)}
+  .ibox.blue{background:var(--bL);border-color:var(--b);color:var(--bD)}
+
+  /* RECOMMENDATIONS TABLE */
+  .rec-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+  .rec-tbl th{background:var(--bg);padding:9px 12px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--tm);border-bottom:2px solid var(--bd);text-transform:uppercase}
+  .rec-tbl td{padding:10px 12px;border-bottom:1px solid var(--bd);vertical-align:top;line-height:1.5}
+  .rec-tbl tr:last-child td{border-bottom:none}
+  .rec-tbl tr:hover td{background:var(--bg)}
+  .rec-tbl .finding{font-size:12px;color:var(--tm)}
+  .bge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+  .bgg{background:var(--gL);color:var(--gD)} .bga{background:var(--aL);color:var(--a)}
+  .bgr{background:var(--rL);color:var(--r)} .bgb{background:var(--bL);color:var(--bD)}
+  .bgp{background:var(--pL);color:var(--p)}
+
+  /* SECTION DIVIDER */
+  .sdiv{background:var(--bg);border:1px solid var(--bd);border-radius:var(--rads);padding:10px 16px;margin-top:12px;font-size:12px;color:var(--tm);display:flex;align-items:center;gap:8px}
+  .sdiv strong{color:var(--t)}
+
+  /* FOOTER */
+  .ftr{margin-top:60px;padding-top:18px;border-top:1px solid var(--bd);font-size:12px;color:var(--tl);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(max-width:720px){.g2,.g3,.g4{grid-template-columns:1fr}.full{grid-column:auto}}
+  @media print{body{background:#fff}.btn{display:none}.page{padding:16px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="badge-row">
+      <span class="badge">HEINEKEN Vietnam</span>
+      <span class="badge-sub">Hanoi Brewery · Báo cáo tổng hợp</span>
+    </div>
+    <h1>Waste & Co-product Report 2025</h1>
+    <div class="sub">Phân tích chất thải và phụ phẩm nhà máy HEINEKEN Hà Nội — Tổng hợp đầy đủ 12 tháng năm 2025</div>
+  </div>
+  <a class="btn" href="#" onclick="window.print();return false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download / Print PDF
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 1: KPIs TỔNG QUAN                      -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sec">Tổng quan năm 2025</div>
+<div class="g4">
+  <div class="kpi g"><div class="lbl">Tổng phế phẩm toàn năm</div><div class="val">20.6M kg</div><div class="note">Toàn bộ được xử lý có ích — zero landfill</div></div>
+  <div class="kpi g"><div class="lbl">Animal feed (tỷ lệ chủ lực)</div><div class="val">82.2%</div><div class="note">Dòng phụ phẩm chiếm ưu thế xuyên suốt năm</div></div>
+  <div class="kpi a"><div class="lbl">Waste intensity trung bình</div><div class="val">17.7 kg/hl</div><div class="note">Dao động 15.4 – 20.2 kg/hl trong năm</div></div>
+  <div class="kpi b"><div class="lbl">Materials recovery</div><div class="val">16.2%</div><div class="note">Vật liệu tái chế / bán phế liệu</div></div>
+  <div class="kpi g"><div class="lbl">Landfill rate</div><div class="val">≈ 0%</div><div class="note">Chỉ 19 kg vào T2 — gần như zero landfill</div></div>
+  <div class="kpi g"><div class="lbl">Sản lượng cao điểm (Dec)</div><div class="val">128,796 hl</div><div class="note">Tháng cao điểm nhất năm — chuẩn bị Tết</div></div>
+  <div class="kpi g"><div class="lbl">Energy recovery (từ T5)</div><div class="val">96–98%</div><div class="note">Pivot lớn nhất năm — chuyển từ 0% trước T5</div></div>
+  <div class="kpi p"><div class="lbl">Non-feed waste (T6 đỉnh)</div><div class="val">23.4%</div><div class="note">T12 thấp nhất 10.6% — biên độ rộng 12.8 pp</div></div>
+</div>
+
+<!-- KPI Recommendations -->
+<div class="card full" style="margin-top:14px">
+  <h3>💡 Recommendations từ tổng quan KPI</h3>
+  <div class="csub">Những hành động ưu tiên rút ra từ các chỉ số tổng hợp năm 2025</div>
+  <table class="rec-tbl">
+    <thead><tr><th>Chỉ số</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị hành động</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Tổng phế phẩm 20.6M kg</strong></td>
+        <td class="finding">Toàn bộ được xử lý có ích, không có bất kỳ kg nào đi vào landfill (ngoại trừ 19 kg tháng 2)</td>
+        <td><span class="bge bgg">Xuất sắc</span></td>
+        <td>Duy trì hệ thống phân loại và xử lý hiện tại; lập tài liệu hóa quy trình thành case study để nhân rộng sang các nhà máy khác trong chuỗi HVN</td>
+      </tr>
+      <tr>
+        <td><strong>Animal feed 82.2%</strong></td>
+        <td class="finding">Nguồn phụ phẩm chủ lực ổn định cả năm, nhưng giá trị gia tăng còn thấp so với tiềm năng</td>
+        <td><span class="bge bgb">Cơ hội nâng cấp</span></td>
+        <td>Nghiên cứu khả năng tích hợp BSF (Black Soldier Fly) farming để chuyển hóa bã men + bã malt thành protein côn trùng, tăng giá trị đầu ra lên 3–5x so với bán thức ăn chăn nuôi truyền thống</td>
+      </tr>
+      <tr>
+        <td><strong>Waste intensity 17.7 kg/hl</strong></td>
+        <td class="finding">Biên độ dao động rộng (15.4–20.2), chứng tỏ còn dư địa cải thiện vào các tháng cao điểm</td>
+        <td><span class="bge bga">Cần theo dõi</span></td>
+        <td>Set target intensity ≤16.5 kg/hl vào 2026; phân tích process tháng 7 và tháng 12 (intensity thấp nhất) để xác định best practice nhân rộng</td>
+      </tr>
+      <tr>
+        <td><strong>Energy recovery từ T5</strong></td>
+        <td class="finding">Chuyển đổi từ 0% (T1–T4) lên 96–98% (T5 onwards) — bước nhảy vọt lớn nhất năm</td>
+        <td><span class="bge bgg">Best practice</span></td>
+        <td>Đảm bảo hợp đồng đốt thu hồi năng lượng được duy trì liên tục từ đầu năm (không còn gap T1–T4 như 2025); mở rộng thêm các dòng waste vào stream này</td>
+      </tr>
+      <tr>
+        <td><strong>Non-feed waste biến động mạnh</strong></td>
+        <td class="finding">T6 đạt 23.4%, T12 chỉ 10.6% — chênh lệch 12.8 pp phản ánh sự không đồng đều trong quản lý materials</td>
+        <td><span class="bge bga">Cần điều tra</span></td>
+        <td>Thiết lập ngưỡng cảnh báo non-feed &gt;20%; khi vượt ngưỡng, kích hoạt review danh mục materials để xác định nguồn gốc và tìm phương án upcycle</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 2: CẤU TRÚC PHẾ PHẨM                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sec">Cấu trúc & phân bổ phế phẩm</div>
+<div class="g2">
+
+  <div class="card">
+    <h3>Khối lượng phế phẩm theo tháng — stacked by loại (kg)</h3>
+    <div class="csub">Toàn bộ 5 dòng waste: Animal feed · Materials · Combustion w/ E · Combustion w/o E · Reuse</div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75"></span>Animal feed</span>
+      <span><span class="ld" style="background:#378ADD"></span>Materials</span>
+      <span><span class="ld" style="background:#EF9F27"></span>Combust. w/ E</span>
+      <span><span class="ld" style="background:#E24B4A"></span>Combust. w/o E</span>
+      <span><span class="ld" style="background:#888780"></span>Reuse</span>
+    </div>
+    <div class="cw" style="height:240px"><canvas id="c-stacked"></canvas></div>
+    <div class="ibox">T11–T12 tổng khối lượng cao nhất năm. T5–T7 thấp nhất — thể hiện nhịp sản xuất mid-year chậm lại trước khi bùng lên Q4.</div>
+    <div class="pills">
+      <span class="pill pg">T11–T12: đỉnh năm</span>
+      <span class="pill pa">T5–T7: đáy năm</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tỷ lệ phân bổ tổng năm 2025 — donut</h3>
+    <div class="csub">Tổng hợp 12 tháng — cơ cấu tổng thể dòng phế phẩm</div>
+    <div class="cw" style="height:210px"><canvas id="c-donut"></canvas></div>
+    <div id="donut-legend" style="margin-top:12px;display:flex;flex-direction:column;gap:5px;font-size:12px;"></div>
+    <div class="ibox blue" style="margin-top:12px">Animal feed chiếm áp đảo 82.2%. Materials (16.2%) là dòng có tiềm năng upcycle lớn nhất còn chưa được khai thác tối đa.</div>
+  </div>
+
+</div>
+
+<div class="g2" style="margin-top:16px">
+
+  <div class="card">
+    <h3>Horizontal 100% stacked — mix phế phẩm từng tháng (%)</h3>
+    <div class="csub">Tháng nào có cấu trúc khác biệt so với baseline?</div>
+    <div class="cw" style="height:260px"><canvas id="c-100pct"></canvas></div>
+    <div class="ibox">T3–T6 có Materials cao hơn hẳn phần còn lại của năm. T12 gần như thuần animal feed (89.4%) — tháng có tỷ lệ circularity cao nhất.</div>
+    <div class="pills">
+      <span class="pill pg">T12: 89.4% animal feed</span>
+      <span class="pill pa">T3–T6: Materials cao</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Reuse & Landfill theo tháng (kg)</h3>
+    <div class="csub">Reuse = bụi cám tái dùng bồi hoàn; Landfill = gần zero toàn năm</div>
+    <div class="cw" style="height:260px"><canvas id="c-reuse-lf"></canvas></div>
+    <div class="ibox amber">Reuse dao động 491–2,893 kg/tháng — không ổn định. Tháng 2 là tháng duy nhất ghi nhận landfill (19 kg) — cần trace nguyên nhân cụ thể.</div>
+    <div class="pills">
+      <span class="pill pg">Jan: Reuse cao nhất 2,893 kg</span>
+      <span class="pill pr">Feb: 19 kg landfill duy nhất</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recommendations: Cấu trúc -->
+<div class="card full" style="margin-top:14px">
+  <h3>💡 Recommendations — Cấu trúc & phân bổ phế phẩm</h3>
+  <div class="csub">Hành động cụ thể để tối ưu cơ cấu xử lý chất thải</div>
+  <table class="rec-tbl">
+    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Materials 16.2% toàn năm, đỉnh T3–T6</strong></td>
+        <td class="finding">Materials tăng vọt vào nửa đầu năm — trùng với chu kỳ thay đổi bao bì / packaging runs; T3 đạt 20.6% — cao nhất năm</td>
+        <td><span class="bge bga">Cần điều tra</span></td>
+        <td>Rà soát lịch sản xuất T3–T6 để xác định nguyên nhân Materials tăng; xem xét điều chỉnh lịch đặt hàng nguyên liệu bao bì để giảm excess; thiết lập target Materials ≤15% cho 2026</td>
+      </tr>
+      <tr>
+        <td><strong>Reuse không ổn định (491–2,893 kg)</strong></td>
+        <td class="finding">Biên độ dao động lớn 6x giữa tháng cao nhất và thấp nhất — chứng tỏ quy trình thu hồi bụi cám chưa được chuẩn hóa</td>
+        <td><span class="bge bga">Cần chuẩn hóa</span></td>
+        <td>Xây dựng SOP cho quy trình thu hồi và tái sử dụng bụi cám bồi hoàn; đặt mục tiêu Reuse tối thiểu 1,500 kg/tháng và theo dõi sát để giảm biến động</td>
+      </tr>
+      <tr>
+        <td><strong>Landfill 19 kg tháng 2</strong></td>
+        <td class="finding">Sự cố đơn lẻ duy nhất trong năm — cần hiểu nguyên nhân để đảm bảo không tái diễn</td>
+        <td><span class="bge bgb">Theo dõi</span></td>
+        <td>Điều tra nguồn gốc 19 kg landfill tháng 2; nếu do loại waste chưa có phương án xử lý, bổ sung vào danh mục tìm vendor xử lý có ích; đặt target landfill = 0 kg cho 2026</td>
+      </tr>
+      <tr>
+        <td><strong>T12: cấu trúc tốt nhất (89.4% animal feed)</strong></td>
+        <td class="finding">Tháng 12 có tỷ lệ animal feed cao nhất năm đồng thời materials thấp nhất — cấu trúc lý tưởng nhất</td>
+        <td><span class="bge bgg">Best practice</span></td>
+        <td>Phân tích điều kiện vận hành tháng 12 (lịch sản xuất, quy trình phân loại, nhà cung cấp thu gom) để xác định yếu tố tạo nên cấu trúc tối ưu này và nhân rộng sang các tháng khác</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 3: SẢN LƯỢNG & VẬN HÀNH                -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sec">Sản lượng & hiệu suất vận hành</div>
+<div class="g2">
+
+  <div class="card">
+    <h3>Sản lượng bia ước tính theo tháng (hl)</h3>
+    <div class="csub">Tính ngược từ Total waste ÷ Intensity = Production volume ước tính</div>
+    <div class="cw" style="height:230px"><canvas id="c-hl"></canvas></div>
+    <div class="ibox">Dec cao nhất (128,796 hl), May thấp nhất (69,862 hl) — biên độ gần 2× trong năm. Q4 bùng sản xuất rõ rệt chuẩn bị Tết.</div>
+    <div class="pills">
+      <span class="pill pg">Dec: 128,796 hl</span>
+      <span class="pill pr">May: 69,862 hl</span>
+      <span class="pill pb">Q4 avg: ~119k hl/tháng</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Biến động tổng waste tháng-qua-tháng (%)</h3>
+    <div class="csub">Phát hiện các tháng bất thường về khối lượng phế phẩm</div>
+    <div class="cw" style="height:230px"><canvas id="c-mom"></canvas></div>
+    <div class="ibox amber">Feb→Mar tăng +51.5% — bất thường nhất năm. Apr→May giảm −32%. Cả hai cần giải thích từ production schedule.</div>
+    <div class="pills">
+      <span class="pill pr">Feb→Mar: +51.5%</span>
+      <span class="pill pa">Apr→May: −32%</span>
+      <span class="pill pg">Jun→Jul: −1% (ổn định)</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="g2" style="margin-top:16px">
+
+  <div class="card">
+    <h3>Waste tích lũy lũy kế cả năm (cumulative kg)</h3>
+    <div class="csub">Đường cong tăng trưởng — milestone quan trọng</div>
+    <div class="cw" style="height:230px"><canvas id="c-cum"></canvas></div>
+    <div class="ibox">H2 (Jul–Dec) đóng góp 54% tổng lượng — brewery chạy nặng hơn trong nửa cuối năm. Milestone 10M kg đạt vào tháng 7.</div>
+    <div class="pills">
+      <span class="pill pgr">H1: 9.5M kg (46%)</span>
+      <span class="pill pg">H2: 11.1M kg (54%)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tổng phế phẩm vs. Waste intensity — bubble chart</h3>
+    <div class="csub">Size bubble = tổng khối lượng; trục Y = intensity (kg/hl)</div>
+    <div class="cw" style="height:230px"><canvas id="c-bubble"></canvas></div>
+    <div class="ibox blue">🎯 Sản lượng cao ≠ intensity cao. T12: volume lớn nhất nhưng intensity thấp thứ 2 (15.9). T3 và T11: volume lớn + intensity cao nhất — đây là 2 tháng cần tối ưu nhất.</div>
+    <div class="pills">
+      <span class="pill pg">Dec: best overall efficiency</span>
+      <span class="pill pr">Nov: worst intensity (20.2)</span>
+      <span class="pill pa">Mar: high vol + high intensity</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recommendations: Sản lượng & vận hành -->
+<div class="card full" style="margin-top:14px">
+  <h3>💡 Recommendations — Sản lượng & hiệu suất vận hành</h3>
+  <div class="csub">Tối ưu lịch sản xuất và giảm waste intensity vào các tháng cao điểm</div>
+  <table class="rec-tbl">
+    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Feb→Mar: +51.5% waste surge</strong></td>
+        <td class="finding">Tổng waste tăng đột ngột nhất năm — có thể liên quan đến restart sau Tết, bảo trì định kỳ, hoặc batch đặc biệt</td>
+        <td><span class="bge bga">Cần điều tra</span></td>
+        <td>Rà soát production log tháng 2–3 để xác định nguyên nhân spike; lên kế hoạch pre-Tet shutdown và startup protocol rõ ràng hơn để giảm waste phát sinh do restart không kiểm soát</td>
+      </tr>
+      <tr>
+        <td><strong>Apr→May: −32% waste drop</strong></td>
+        <td class="finding">Sụt giảm mạnh nhất năm — có thể do công suất sản xuất giảm hoặc cải tiến quy trình</td>
+        <td><span class="bge bgb">Theo dõi</span></td>
+        <td>Xác định nguyên nhân giảm sâu; nếu do cải tiến quy trình thì nhân rộng; nếu do giảm công suất thì lập kế hoạch dự phòng để ổn định nguồn phụ phẩm cho đối tác thu gom</td>
+      </tr>
+      <tr>
+        <td><strong>T3 và T11: high volume + high intensity</strong></td>
+        <td class="finding">2 tháng kém hiệu quả nhất — trùng với cao điểm sản xuất trước Tết (T3) và cuối năm (T11)</td>
+        <td><span class="bge bgr">Ưu tiên cao</span></td>
+        <td>Thực hiện Kaizen waste reduction tập trung vào T3 và T11; tăng cường bảo trì phòng ngừa trước các giai đoạn cao điểm; phân tích T7 (intensity 15.4) như benchmark để học hỏi</td>
+      </tr>
+      <tr>
+        <td><strong>T12: best efficiency (128k hl, intensity 15.9)</strong></td>
+        <td class="finding">Sản lượng cao nhất nhưng intensity chỉ 15.9 kg/hl — chứng minh scale-up không nhất thiết làm tăng intensity</td>
+        <td><span class="bge bgg">Best practice</span></td>
+        <td>Document process T12 làm baseline benchmark; đặt target intensity ≤16.5 kg/hl cho tất cả các tháng Q4 2026; áp dụng crew scheduling và raw material batching của T12 vào các tháng high-volume khác</td>
+      </tr>
+      <tr>
+        <td><strong>H2 chiếm 54% tổng waste</strong></td>
+        <td class="finding">Brewery chạy nặng hơn trong nửa cuối năm — tạo ra áp lực lớn hơn lên hệ thống xử lý chất thải</td>
+        <td><span class="bge bgb">Cần chuẩn bị</span></td>
+        <td>Lên kế hoạch capacity cho hệ thống thu gom và xử lý phế phẩm theo seasonality; đảm bảo hợp đồng với đối tác animal feed và combustion có buffer capacity cho các tháng Q4 peak</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 4: WASTE INTENSITY                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sec">Waste intensity & phân tích theo quý</div>
+<div class="g2">
+
+  <div class="card">
+    <h3>Waste intensity theo tháng (kg/hl)</h3>
+    <div class="csub">Chỉ số hiệu quả sử dụng nguyên liệu — thấp hơn = tốt hơn</div>
+    <div class="cw" style="height:220px"><canvas id="c-intensity"></canvas></div>
+    <div class="ibox amber">T11 cao nhất (20.2 kg/hl) và T7 thấp nhất (15.4 kg/hl) — chênh lệch 4.8 kg/hl tương đương ~30% hiệu suất. Đây là dư địa cải thiện rõ ràng nhất.</div>
+    <div class="pills">
+      <span class="pill pr">T11: 20.2 kg/hl — worst</span>
+      <span class="pill pg">T7: 15.4 kg/hl — best</span>
+      <span class="pill pa">Avg: 17.7 kg/hl</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>So sánh cấu trúc phế phẩm theo quý — radar chart</h3>
+    <div class="csub">Mỗi quý nghiêng về dòng waste nào?</div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75;border-radius:50%"></span>Q1</span>
+      <span><span class="ld" style="background:#378ADD;border-radius:50%"></span>Q2</span>
+      <span><span class="ld" style="background:#EF9F27;border-radius:50%"></span>Q3</span>
+      <span><span class="ld" style="background:#E24B4A;border-radius:50%"></span>Q4</span>
+    </div>
+    <div class="cw" style="height:280px"><canvas id="c-radar"></canvas></div>
+    <div class="ibox blue">Q1 và Q4 có profile gần giống nhau (cả hai đều có combustion w/o E cao hơn). Q2–Q3 nổi bật về Materials. Q4 có animal feed cao nhất.</div>
+    <div class="pills">
+      <span class="pill pb">Q1 &amp; Q4 profile tương đồng</span>
+      <span class="pill pa">Q2–Q3: Materials cao hơn rõ rệt</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recommendations: Intensity -->
+<div class="card full" style="margin-top:14px">
+  <h3>💡 Recommendations — Waste intensity & phân tích theo quý</h3>
+  <div class="csub">Giảm intensity và tối ưu cấu trúc waste theo từng giai đoạn trong năm</div>
+  <table class="rec-tbl">
+    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>T11: intensity đỉnh 20.2 kg/hl</strong></td>
+        <td class="finding">Tháng 11 có waste intensity tồi nhất trong năm — cao hơn 31% so với T7 tốt nhất</td>
+        <td><span class="bge bgr">Ưu tiên cao</span></td>
+        <td>Điều tra quy trình vận hành T11: thiết bị xuống cấp? thay đổi nguyên liệu đầu vào? cường độ sản xuất không tối ưu? Xem xét preventive maintenance đặc biệt trước tháng 11 hàng năm</td>
+      </tr>
+      <tr>
+        <td><strong>T7: intensity tốt nhất 15.4 kg/hl</strong></td>
+        <td class="finding">Tháng 7 đạt hiệu quả vận hành tốt nhất — cần hiểu tại sao để nhân rộng</td>
+        <td><span class="bge bgg">Best practice</span></td>
+        <td>Phân tích chi tiết T7: lịch bảo trì, mix nguyên liệu, tốc độ dây chuyền, ca làm việc. Xây dựng "July playbook" áp dụng cho các tháng khác; đặt target cho Q1/2026 phải đạt intensity ≤16.5</td>
+      </tr>
+      <tr>
+        <td><strong>Q1 và Q4 có combustion w/o E cao hơn</strong></td>
+        <td class="finding">Radar chart cho thấy Q1 đặc biệt có combustion without energy cao — trước thời điểm chuyển đổi sang energy recovery từ T5</td>
+        <td><span class="bge bga">Cần cải thiện</span></td>
+        <td>Đảm bảo hợp đồng energy recovery được kích hoạt ngay từ tháng 1 năm sau (không còn gap T1–T4); review danh sách waste types trong Q1 và phân loại từng loại vào stream phù hợp sớm hơn</td>
+      </tr>
+      <tr>
+        <td><strong>Q2–Q3 có Materials cao hơn rõ rệt</strong></td>
+        <td class="finding">Seasonal pattern — Q2/Q3 consistently có tỷ lệ materials recovery cao hơn Q1/Q4</td>
+        <td><span class="bge bgb">Cơ hội</span></td>
+        <td>Tận dụng tính seasonal của Materials flow để lên lịch batch recycling tập trung vào Q2–Q3; đàm phán hợp đồng materials collection với giá tốt hơn cho giai đoạn này dựa trên khối lượng dự báo</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 5: COMBUSTION & ENERGY RECOVERY        -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sec">Combustion & energy recovery</div>
+<div class="g2">
+
+  <div class="card">
+    <h3>Chuyển đổi combustion: energy vs. non-energy recovery</h3>
+    <div class="csub">T5 là pivot point — từ đây combustion w/o energy gần về zero</div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75"></span>With energy recovery</span>
+      <span><span class="ld" style="background:#E24B4A"></span>Without energy recovery</span>
+    </div>
+    <div class="cw" style="height:220px"><canvas id="c-combustion"></canvas></div>
+    <div class="ibox">Từ tháng 5: gần như 100% combustion stream đã chuyển sang có thu hồi năng lượng. Đây là một trong những cải tiến môi trường lớn nhất của nhà máy trong năm 2025.</div>
+    <div class="pills">
+      <span class="pill pr">T1–T4: 100% non-energy recovery</span>
+      <span class="pill pg">T5 pivot: bắt đầu chuyển đổi</span>
+      <span class="pill pg">T7+: ~100% energy recovery</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tỷ lệ energy recovery trong combustion (%)</h3>
+    <div class="csub">0% trước T5 → nhảy lên 95–98% từ T5 — cải tiến lớn nhất năm</div>
+    <div class="cw" style="height:220px"><canvas id="c-eratio"></canvas></div>
+    <div class="ibox amber">T8 và T10 giảm nhẹ về 95.5% — cần kiểm tra liệu đây là seasonal fluctuation hay operational issue. T12 đạt 98.3% — cao nhất năm.</div>
+    <div class="pills">
+      <span class="pill pr">T1–T4: 0% (non-recovery)</span>
+      <span class="pill pg">T12: 98.3% — đỉnh năm</span>
+      <span class="pill pa">T8 &amp; T10: 95.5% — drop nhỏ</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recommendations: Combustion -->
+<div class="card full" style="margin-top:14px">
+  <h3>💡 Recommendations — Combustion & energy recovery</h3>
+  <div class="csub">Duy trì và nâng cao hiệu quả chuyển đổi năng lượng từ chất thải đốt</div>
+  <table class="rec-tbl">
+    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Gap T1–T4: 0% energy recovery</strong></td>
+        <td class="finding">4 tháng đầu năm toàn bộ combustion là non-energy recovery — tốn cơ hội thu hồi NL đáng kể</td>
+        <td><span class="bge bgr">Cần khắc phục</span></td>
+        <td>Ký hợp đồng đốt thu hồi năng lượng hiệu lực từ 01/01 cho năm tiếp theo; tránh để khoảng trống 4 tháng đầu năm như 2025; ước tính potential energy recovered nếu toàn năm đạt 97%</td>
+      </tr>
+      <tr>
+        <td><strong>Chuyển đổi từ T5 — thành công lớn</strong></td>
+        <td class="finding">Từ T5 đến T12, gần như 100% combustion có thu hồi NL — bước nhảy vọt từ 0% lên 96–98%</td>
+        <td><span class="bge bgg">Kết quả xuất sắc</span></td>
+        <td>Ghi nhận và report thành tích này trong HVN sustainability report; tính toán lượng CO₂ tương đương tiết kiệm được từ chuyển đổi này; xem xét mở rộng danh mục waste streams vào energy recovery</td>
+      </tr>
+      <tr>
+        <td><strong>T8 và T10 giảm xuống 95.5%</strong></td>
+        <td class="finding">2 điểm giảm nhỏ trong xu hướng tổng thể tốt — có thể do thay đổi vendor, loại waste, hoặc vấn đề vận hành cụ thể</td>
+        <td><span class="bge bgb">Theo dõi</span></td>
+        <td>Review waste composition và vendor performance cho T8 và T10; nếu do loại waste cụ thể không phù hợp với lò đốt, xem xét phân loại tách biệt; đặt target ≥97% cho tất cả các tháng từ T5 trở đi</td>
+      </tr>
+      <tr>
+        <td><strong>Combustion w/o E còn tồn tại từ packaging waste</strong></td>
+        <td class="finding">Nhãn, PET film, rác nguy hại (mực in, giẻ lau) vẫn đang đi vào combustion without energy — dù đang giảm dần</td>
+        <td><span class="bge bga">Cần chuyển đổi</span></td>
+        <td>Ưu tiên chuyển toàn bộ packaging waste (nhãn, PET film) sang lò đốt có thu hồi NL; với rác nguy hại, khảo sát khả năng sử dụng làm nguyên liệu gạch không nung theo đề xuất ISO 14K của nhà máy</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 6: CIRCULARITY — ANIMAL FEED & NON-FEED-->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="sec">Circularity streams — Animal feed & non-feed</div>
+<div class="g2">
+
+  <div class="card">
+    <h3>Animal feed % — xu hướng theo tháng</h3>
+    <div class="csub">Tỷ lệ animal feed biến động do thay đổi composition tổng waste</div>
+    <div class="cw" style="height:220px"><canvas id="c-aftrend"></canvas></div>
+    <div class="ibox">T12 đạt đỉnh 89.4% — tháng tốt nhất về circularity. T6 đáy 76.6% — trùng với tháng non-feed cao nhất. Xu hướng tổng thể ổn định trong biên 76–90%.</div>
+    <div class="pills">
+      <span class="pill pg">T12: 89.4% — đỉnh</span>
+      <span class="pill pa">T6: 76.6% — đáy</span>
+      <span class="pill pgr">Avg: ~82%</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Non-feed waste % theo tháng</h3>
+    <div class="csub">Phần trăm chất thải không được xử lý theo hướng thức ăn chăn nuôi — cơ hội cho upcycling thêm</div>
+    <div class="cw" style="height:220px"><canvas id="c-nonfeed"></canvas></div>
+    <div class="ibox amber">T6 có non-feed cao nhất (23.4%), T12 thấp nhất (10.6%). Tháng có non-feed cao = tháng có nhiều materials và combustion thải ra nhất — cơ hội upcycle lớn nhất.</div>
+    <div class="pills">
+      <span class="pill pr">T6: 23.4% non-feed — đỉnh</span>
+      <span class="pill pg">T12: 10.6% non-feed — tốt nhất</span>
+      <span class="pill pa">Avg: ~17.8% non-feed</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Recommendations: Circularity -->
+<div class="card full" style="margin-top:14px">
+  <h3>💡 Recommendations — Circularity streams</h3>
+  <div class="csub">Nâng cao giá trị circularity từ animal feed và các dòng non-feed</div>
+  <table class="rec-tbl">
+    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Animal feed 82.2% — ổn định nhưng giá trị thấp</strong></td>
+        <td class="finding">Bã malt, bã men, cám — hiện đang bán làm thức ăn gia súc truyền thống với giá trị tương đối thấp</td>
+        <td><span class="bge bgb">Cơ hội nâng cấp</span></td>
+        <td>Pilot BSF (Black Soldier Fly) farming với 10–20% khối lượng bã men/malt; protein côn trùng có giá trị cao hơn 3–5x; khảo sát đối tác BSF farming tại miền Bắc Việt Nam có thể tiếp nhận nguyên liệu từ nhà máy</td>
+      </tr>
+      <tr>
+        <td><strong>Non-feed đỉnh T6: 23.4%</strong></td>
+        <td class="finding">Tháng 6 là tháng có cơ hội upcycle lớn nhất nhưng cũng là tháng xử lý kém hiệu quả nhất về circularity</td>
+        <td><span class="bge bga">Cần cải thiện</span></td>
+        <td>Lập kế hoạch upcycle riêng cho tháng 6: tăng tần suất thu gom materials, đảm bảo đủ capacity lò đốt thu hồi NL; đặt mục tiêu non-feed ≤18% cho T6 của 2026</td>
+      </tr>
+      <tr>
+        <td><strong>Spent kieselguhr (bột trợ lọc)</strong></td>
+        <td class="finding">Hiện làm gạch — nhưng còn cơ hội compost hoặc vật liệu xây dựng không nung theo ISO 14K</td>
+        <td><span class="bge bgb">Cơ hội</span></td>
+        <td>Đánh giá feasibility gạch không nung từ spent kieselguhr kết hợp với bùn WWTP; nếu scale được, có thể tạo thêm một dòng circular material mới với giá trị cao hơn và carbon footprint thấp hơn gạch nung</td>
+      </tr>
+      <tr>
+        <td><strong>Bùn thải WWTP (aerobic sludge)</strong></td>
+        <td class="finding">Hiện làm phân bón compost — là phương án tốt nhưng còn có thể kết hợp thêm</td>
+        <td><span class="bge bgg">Đang tốt</span></td>
+        <td>Duy trì hệ thống compost phân bón hiện tại; nghiên cứu thêm khả năng kết hợp bùn WWTP + spent kieselguhr làm nguyên liệu gạch không nung để giảm volume cần compost và tăng giá trị đầu ra</td>
+      </tr>
+      <tr>
+        <td><strong>Can-to-can / returnable packaging</strong></td>
+        <td class="finding">Lon thải, stretch film, carton, pallet gỗ hiện bán phế liệu — chưa có closed-loop circularity</td>
+        <td><span class="bge bgb">Cơ hội</span></td>
+        <td>Tiếp cận nhà cung cấp bao bì để thí điểm returnable packaging program; phối hợp với HVN central để đánh giá can-to-can circularity scheme nhằm giảm materials waste và tạo dòng giá trị mới</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FOOTER -->
+<div class="ftr">
+  <span>HEINEKEN Vietnam – Hanoi Brewery · Waste & Co-product Report 2025 · Tổng hợp từ dữ liệu nội bộ HVN</span>
+  <span>Generated June 2025 · Data source: HVNHN Internal waste tracking system</span>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const AF=[1371850,1124050,1523180,1513770,1010480,1085020,1128630,1343930,1488390,1668100,1833200,1830570];
+const MAT=[226573,134753,400537,353492,260136,302648,237395,317809,299391,275518,331137,185550];
+const CE=[0,0,0,0,20754,25406,33961,29647,28641,25442,24723,29640];
+const CN=[15686,24062,21001,31659,579,729,634,1394,501,1201,934,513];
+const RU=[2893,1425,718,1885,491,1951,676,1936,830,2009,1786,1587];
+const INT=[17.4,16.1,19.1,18.2,18.5,17.7,15.4,18.2,19.4,16.3,20.2,15.9];
+const TOT=M.map((_,i)=>AF[i]+MAT[i]+CE[i]+CN[i]+RU[i]);
+const HL=TOT.map((v,i)=>Math.round(v/INT[i]));
+const LF=[0,19,0,0,0,0,0,0,0,0,0,0];
+const CUM=[];let r=0;TOT.forEach(v=>{r+=v;CUM.push(r)});
+const MOM=M.slice(1).map((m,i)=>parseFloat(((TOT[i+1]-TOT[i])/TOT[i]*100).toFixed(1)));
+const MOM_LABELS=M.slice(1).map((m,i)=>M[i]+'→'+m);
+const COMB=M.map((_,i)=>CE[i]+CN[i]);
+const ERATIO=M.map((_,i)=>COMB[i]>0?parseFloat((CE[i]/COMB[i]*100).toFixed(1)):0);
+const NF=M.map((_,i)=>parseFloat(((MAT[i]+CE[i]+CN[i]+RU[i])/TOT[i]*100).toFixed(1)));
+const afPct=M.map((_,i)=>parseFloat(((AF[i]/TOT[i])*100).toFixed(1)));
+const PCT=(arr)=>M.map((_,i)=>parseFloat((arr[i]/TOT[i]*100).toFixed(1)));
+const gc='rgba(0,0,0,0.06)',tc='#888780';
+const cats=['Animal feed','Materials','Combust. w/ energy','Combust. w/o energy','Reuse'];
+const clrs=['#1D9E75','#378ADD','#EF9F27','#E24B4A','#888780'];
+const annT=[AF,MAT,CE,CN,RU].map(a=>a.reduce((s,v)=>s+v,0));
+const grand=annT.reduce((a,b)=>a+b,0);
+const mClrs=['#1D9E75','#378ADD','#EF9F27','#E24B4A','#888780','#7F77DD','#D85A30','#639922','#D4537E','#BA7517','#5DCAA5','#185FA5'];
+
+function nc(id,cfg){new Chart(document.getElementById(id),cfg)}
+
+// 1. STACKED BAR
+nc('c-stacked',{type:'bar',
+  data:{labels:M,datasets:[
+    {label:'Animal feed',data:AF,backgroundColor:'#1D9E75',stack:'s'},
+    {label:'Materials',data:MAT,backgroundColor:'#378ADD',stack:'s'},
+    {label:'Combust. w/ E',data:CE,backgroundColor:'#EF9F27',stack:'s'},
+    {label:'Combust. w/o E',data:CN,backgroundColor:'#E24B4A',stack:'s'},
+    {label:'Reuse',data:RU,backgroundColor:'#888780',stack:'s'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${(c.raw/1000).toFixed(0)}k kg`}}},
+    scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{stacked:true,ticks:{color:tc,font:{size:10},callback:v=>(v/1000000).toFixed(1)+'M'},grid:{color:gc}}}
+  }
+});
+
+// 2. DONUT
+nc('c-donut',{type:'doughnut',
+  data:{labels:cats,datasets:[{data:annT,backgroundColor:clrs,borderWidth:0,hoverOffset:6}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.label}: ${((c.raw/grand)*100).toFixed(1)}%`}}}
+  }
+});
+const dl=document.getElementById('donut-legend');
+cats.forEach((cat,i)=>{
+  const pct=((annT[i]/grand)*100).toFixed(1);
+  const row=document.createElement('div');
+  row.style.cssText='display:flex;align-items:center;justify-content:space-between;font-size:12px;';
+  row.innerHTML=`<span style="display:flex;align-items:center;gap:5px;color:#5F5E5A"><span style="width:9px;height:9px;border-radius:2px;background:${clrs[i]};display:inline-block;"></span>${cat}</span><strong style="color:#2C2C2A">${pct}%</strong>`;
+  dl.appendChild(row);
+});
+
+// 3. 100% STACKED
+const p_AF=PCT(AF),p_MAT=PCT(MAT),p_CE=PCT(CE),p_CN=PCT(CN),p_RU=PCT(RU);
+nc('c-100pct',{type:'bar',
+  data:{labels:M,datasets:[
+    {label:'Animal feed',data:p_AF,backgroundColor:'#1D9E75',stack:'s'},
+    {label:'Materials',data:p_MAT,backgroundColor:'#378ADD',stack:'s'},
+    {label:'Combust. w/ E',data:p_CE,backgroundColor:'#EF9F27',stack:'s'},
+    {label:'Combust. w/o E',data:p_CN,backgroundColor:'#E24B4A',stack:'s'},
+    {label:'Reuse',data:p_RU,backgroundColor:'#888780',stack:'s'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}%`}}},
+    scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{stacked:true,max:100,ticks:{color:tc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}
+  }
+});
+
+// 4. REUSE + LANDFILL
+nc('c-reuse-lf',{type:'bar',
+  data:{labels:M,datasets:[
+    {label:'Reuse (kg)',data:RU,backgroundColor:'rgba(55,138,221,0.7)',borderRadius:3,yAxisID:'y',borderSkipped:false},
+    {label:'Landfill (kg)',data:LF,backgroundColor:'rgba(226,75,74,0.8)',borderRadius:3,yAxisID:'y2',borderSkipped:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw} kg`}}},
+    scales:{
+      x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{position:'left',ticks:{color:'#378ADD',font:{size:10},callback:v=>v+' kg'},grid:{color:gc},title:{display:true,text:'Reuse (kg)',color:'#378ADD',font:{size:10}}},
+      y2:{position:'right',min:0,max:30,ticks:{color:'#E24B4A',font:{size:10},callback:v=>v+' kg'},grid:{display:false},title:{display:true,text:'Landfill (kg)',color:'#E24B4A',font:{size:10}}}
+    }
+  }
+});
+
+// 5. HL PRODUCED
+nc('c-hl',{type:'bar',
+  data:{labels:M,datasets:[{
+    label:'hl ước tính',data:HL,
+    backgroundColor:HL.map(v=>v===Math.max(...HL)?'#1D9E75':v===Math.min(...HL)?'#E24B4A':'#B5D4F4'),
+    borderRadius:4,borderSkipped:false
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw.toLocaleString()} hl`}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{ticks:{color:tc,font:{size:10},callback:v=>(v/1000).toFixed(0)+'k'},grid:{color:gc}}}
+  }
+});
+
+// 6. MoM DELTA
+nc('c-mom',{type:'bar',
+  data:{labels:MOM_LABELS,datasets:[{
+    label:'MoM %',data:MOM,
+    backgroundColor:MOM.map(v=>v>0?'rgba(29,158,117,0.75)':'rgba(226,75,74,0.75)'),
+    borderRadius:3,borderSkipped:false
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw>0?'+':''}${c.raw}%`}}},
+    scales:{x:{ticks:{color:tc,font:{size:9},maxRotation:45},grid:{color:gc}},
+      y:{ticks:{color:tc,font:{size:10},callback:v=>v+'%'},grid:{color:gc},title:{display:true,text:'% change',color:tc,font:{size:10}}}}
+  }
+});
+
+// 7. CUMULATIVE
+nc('c-cum',{type:'line',
+  data:{labels:M,datasets:[{
+    label:'Cumulative waste',data:CUM,
+    borderColor:'#7F77DD',backgroundColor:'rgba(127,119,221,0.08)',
+    borderWidth:2.5,tension:0.3,fill:true,pointBackgroundColor:'#7F77DD',pointRadius:4,
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${(c.raw/1000000).toFixed(2)}M kg`}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{ticks:{color:tc,font:{size:10},callback:v=>(v/1000000).toFixed(0)+'M'},grid:{color:gc}}}
+  }
+});
+
+// 8. BUBBLE: total volume vs intensity
+nc('c-bubble',{type:'bubble',
+  data:{datasets:M.map((m,i)=>({
+    label:m,
+    data:[{x:i+1,y:INT[i],r:Math.sqrt(TOT[i]/1000000)*18}],
+    backgroundColor:mClrs[i]+'BB',borderColor:mClrs[i],borderWidth:1.5,
+  }))},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{
+      const i=c.datasetIndex;
+      return[` ${M[i]}`,` Intensity: ${INT[i]} kg/hl`,` Total: ${(TOT[i]/1000000).toFixed(2)}M kg`];
+    }}}},
+    scales:{
+      x:{min:0,max:13,ticks:{color:tc,font:{size:10},callback:v=>M[v-1]||''},grid:{color:gc}},
+      y:{min:14,max:22,ticks:{color:tc,font:{size:10},callback:v=>v+' kg/hl'},grid:{color:gc},
+        title:{display:true,text:'Waste intensity (kg/hl)',color:tc,font:{size:11}}}
+    }
+  }
+});
+
+// 9. INTENSITY TREND
+nc('c-intensity',{type:'line',
+  data:{labels:M,datasets:[{
+    label:'kg/hl',data:INT,
+    borderColor:'#BA7517',backgroundColor:'rgba(186,117,23,0.08)',
+    borderWidth:2.5,tension:0.35,fill:true,
+    pointBackgroundColor:INT.map(v=>v===Math.min(...INT)?'#1D9E75':v===Math.max(...INT)?'#E24B4A':'#BA7517'),
+    pointRadius:INT.map(v=>(v===Math.min(...INT)||v===Math.max(...INT))?6:4),
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw} kg/hl`}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{min:14,max:21,ticks:{color:tc,font:{size:10},callback:v=>v+' kg/hl'},grid:{color:gc}}}
+  }
+});
+
+// 10. RADAR — by QUARTER
+function qAvgPct(qi,arr){
+  const sub=qi.map(i=>arr[i]),subT=qi.map(i=>TOT[i]);
+  const total=subT.reduce((a,b)=>a+b,0);
+  return parseFloat(((sub.reduce((a,b)=>a+b,0)/total)*100).toFixed(1));
+}
+const Q1=[0,1,2],Q2=[3,4,5],Q3=[6,7,8],Q4=[9,10,11];
+const dArrs=[AF,MAT,CE,CN,RU];
+function qData(qi){return dArrs.map(arr=>qAvgPct(qi,arr));}
+nc('c-radar',{type:'radar',
+  data:{labels:['Animal feed','Materials','Combust. w/ E','Combust. w/o E','Reuse'],
+    datasets:[
+      {label:'Q1',data:qData(Q1),borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.1)',pointBackgroundColor:'#1D9E75',borderWidth:1.5},
+      {label:'Q2',data:qData(Q2),borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,0.1)',pointBackgroundColor:'#378ADD',borderWidth:1.5},
+      {label:'Q3',data:qData(Q3),borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,0.1)',pointBackgroundColor:'#EF9F27',borderWidth:1.5},
+      {label:'Q4',data:qData(Q4),borderColor:'#E24B4A',backgroundColor:'rgba(226,75,74,0.1)',pointBackgroundColor:'#E24B4A',borderWidth:1.5},
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw}%`}}},
+    scales:{r:{beginAtZero:true,max:90,ticks:{stepSize:20,color:tc,font:{size:10},backdropColor:'transparent'},grid:{color:gc},pointLabels:{color:tc,font:{size:11}}}}
+  }
+});
+
+// 11. COMBUSTION SHIFT
+nc('c-combustion',{type:'bar',
+  data:{labels:M,datasets:[
+    {label:'With energy recovery',data:CE,backgroundColor:'#1D9E75',stack:'c'},
+    {label:'Without energy recovery',data:CN,backgroundColor:'#E24B4A',stack:'c'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${(c.raw/1000).toFixed(1)}k kg`}}},
+    scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{stacked:true,ticks:{color:tc,font:{size:10},callback:v=>(v/1000).toFixed(0)+'k'},grid:{color:gc}}}
+  }
+});
+
+// 12. E-RATIO
+nc('c-eratio',{type:'bar',
+  data:{labels:M,datasets:[{
+    label:'Energy recovery %',data:ERATIO,
+    backgroundColor:ERATIO.map(v=>v===0?'#E24B4A':v>=98?'#1D9E75':v>=95?'#5DCAA5':'#EF9F27'),
+    borderRadius:4,borderSkipped:false
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}%`}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{min:0,max:100,ticks:{color:tc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}
+  }
+});
+
+// 13. ANIMAL FEED % TREND
+nc('c-aftrend',{type:'line',
+  data:{labels:M,datasets:[{
+    label:'Animal feed %',data:afPct,
+    borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.07)',
+    borderWidth:2.5,tension:0.3,fill:true,pointBackgroundColor:'#1D9E75',pointRadius:4,
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}%`}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{min:76,max:92,ticks:{color:tc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}
+  }
+});
+
+// 14. NON-FEED %
+nc('c-nonfeed',{type:'line',
+  data:{labels:M,datasets:[{
+    label:'Non-feed %',data:NF,
+    borderColor:'#D85A30',backgroundColor:'rgba(216,90,48,0.08)',
+    borderWidth:2.5,tension:0.35,fill:true,
+    pointBackgroundColor:NF.map(v=>v===Math.max(...NF)?'#E24B4A':v===Math.min(...NF)?'#1D9E75':'#D85A30'),
+    pointRadius:NF.map(v=>(v===Math.max(...NF)||v===Math.min(...NF))?7:4),
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}% non-feed`}}},
+    scales:{x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+      y:{ticks:{color:tc,font:{size:10},callback:v=>v+'%'},grid:{color:gc}}}
+  }
+});
+</script>
+</body>
+</html>
