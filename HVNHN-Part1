@@ -107,11 +107,11 @@
 <div class="hdr">
   <div class="hdr-left">
     <div class="badge-row">
-      <span class="badge">HEINEKEN Vietnam</span>
-      <span class="badge-sub">Hanoi Brewery · Báo cáo tổng hợp</span>
+      <span class="badge">HEINEKEN VIETNAM</span>
+      <span class="badge-sub">Hanoi Brewery</span>
     </div>
     <h1>Waste & Co-product Report 2025</h1>
-    <div class="sub">Phân tích chất thải và phụ phẩm nhà máy HEINEKEN Hà Nội — Tổng hợp đầy đủ 12 tháng năm 2025</div>
+    <div class="sub">Phân tích chất thải và phụ phẩm nhà máy HEINEKEN Hà Nội năm 2025</div>
   </div>
   <a class="btn" href="#" onclick="window.print();return false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -134,47 +134,6 @@
   <div class="kpi p"><div class="lbl">Non-feed waste (T6 đỉnh)</div><div class="val">23.4%</div><div class="note">T12 thấp nhất 10.6% — biên độ rộng 12.8 pp</div></div>
 </div>
 
-<!-- KPI Recommendations -->
-<div class="card full" style="margin-top:14px">
-  <h3>💡 Recommendations từ tổng quan KPI</h3>
-  <div class="csub">Những hành động ưu tiên rút ra từ các chỉ số tổng hợp năm 2025</div>
-  <table class="rec-tbl">
-    <thead><tr><th>Chỉ số</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị hành động</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Tổng phế phẩm 20.6M kg</strong></td>
-        <td class="finding">Toàn bộ được xử lý có ích, không có bất kỳ kg nào đi vào landfill (ngoại trừ 19 kg tháng 2)</td>
-        <td><span class="bge bgg">Xuất sắc</span></td>
-        <td>Duy trì hệ thống phân loại và xử lý hiện tại; lập tài liệu hóa quy trình thành case study để nhân rộng sang các nhà máy khác trong chuỗi HVN</td>
-      </tr>
-      <tr>
-        <td><strong>Animal feed 82.2%</strong></td>
-        <td class="finding">Nguồn phụ phẩm chủ lực ổn định cả năm, nhưng giá trị gia tăng còn thấp so với tiềm năng</td>
-        <td><span class="bge bgb">Cơ hội nâng cấp</span></td>
-        <td>Nghiên cứu khả năng tích hợp BSF (Black Soldier Fly) farming để chuyển hóa bã men + bã malt thành protein côn trùng, tăng giá trị đầu ra lên 3–5x so với bán thức ăn chăn nuôi truyền thống</td>
-      </tr>
-      <tr>
-        <td><strong>Waste intensity 17.7 kg/hl</strong></td>
-        <td class="finding">Biên độ dao động rộng (15.4–20.2), chứng tỏ còn dư địa cải thiện vào các tháng cao điểm</td>
-        <td><span class="bge bga">Cần theo dõi</span></td>
-        <td>Set target intensity ≤16.5 kg/hl vào 2026; phân tích process tháng 7 và tháng 12 (intensity thấp nhất) để xác định best practice nhân rộng</td>
-      </tr>
-      <tr>
-        <td><strong>Energy recovery từ T5</strong></td>
-        <td class="finding">Chuyển đổi từ 0% (T1–T4) lên 96–98% (T5 onwards) — bước nhảy vọt lớn nhất năm</td>
-        <td><span class="bge bgg">Best practice</span></td>
-        <td>Đảm bảo hợp đồng đốt thu hồi năng lượng được duy trì liên tục từ đầu năm (không còn gap T1–T4 như 2025); mở rộng thêm các dòng waste vào stream này</td>
-      </tr>
-      <tr>
-        <td><strong>Non-feed waste biến động mạnh</strong></td>
-        <td class="finding">T6 đạt 23.4%, T12 chỉ 10.6% — chênh lệch 12.8 pp phản ánh sự không đồng đều trong quản lý materials</td>
-        <td><span class="bge bga">Cần điều tra</span></td>
-        <td>Thiết lập ngưỡng cảnh báo non-feed &gt;20%; khi vượt ngưỡng, kích hoạt review danh mục materials để xác định nguồn gốc và tìm phương án upcycle</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
 <!-- ═══════════════════════════════════════════════ -->
 <!-- SECTION 2: CẤU TRÚC PHẾ PHẨM                   -->
 <!-- ═══════════════════════════════════════════════ -->
@@ -182,8 +141,8 @@
 <div class="g2">
 
   <div class="card">
-    <h3>Khối lượng phế phẩm theo tháng — stacked by loại (kg)</h3>
-    <div class="csub">Toàn bộ 5 dòng waste: Animal feed · Materials · Combustion w/ E · Combustion w/o E · Reuse</div>
+    <h3>Khối lượng phế phẩm theo tháng (kg)</h3>
+    <div class="csub">Toàn bộ 5 dòng waste: Animal feed, Materials, Combustion with Energy recovery, Combustion without Energy recovery, Reuse</div>
     <div class="leg">
       <span><span class="ld" style="background:#1D9E75"></span>Animal feed</span>
       <span><span class="ld" style="background:#378ADD"></span>Materials</span>
@@ -192,16 +151,16 @@
       <span><span class="ld" style="background:#888780"></span>Reuse</span>
     </div>
     <div class="cw" style="height:240px"><canvas id="c-stacked"></canvas></div>
-    <div class="ibox">T11–T12 tổng khối lượng cao nhất năm. T5–T7 thấp nhất — thể hiện nhịp sản xuất mid-year chậm lại trước khi bùng lên Q4.</div>
+    <div class="ibox">T11–T12 tổng khối lượng cao nhất năm. T5–T7 thấp nhất — thể hiện nhịp sản xuất mid-year chậm lại trước khi bùng lên trong Q4.</div>
     <div class="pills">
-      <span class="pill pg">T11–T12: đỉnh năm</span>
-      <span class="pill pa">T5–T7: đáy năm</span>
+      <span class="pill pg">T11–T12: đỉnh</span>
+      <span class="pill pa">T5–T7: đáy</span>
     </div>
   </div>
 
   <div class="card">
-    <h3>Tỷ lệ phân bổ tổng năm 2025 — donut</h3>
-    <div class="csub">Tổng hợp 12 tháng — cơ cấu tổng thể dòng phế phẩm</div>
+    <h3>Tỷ lệ phân bổ tổng năm 2025 — donut chart</h3>
+    <div class="csub">Cơ cấu tổng thể dòng phế phẩm</div>
     <div class="cw" style="height:210px"><canvas id="c-donut"></canvas></div>
     <div id="donut-legend" style="margin-top:12px;display:flex;flex-direction:column;gap:5px;font-size:12px;"></div>
     <div class="ibox blue" style="margin-top:12px">Animal feed chiếm áp đảo 82.2%. Materials (16.2%) là dòng có tiềm năng upcycle lớn nhất còn chưa được khai thác tối đa.</div>
@@ -212,8 +171,7 @@
 <div class="g2" style="margin-top:16px">
 
   <div class="card">
-    <h3>Horizontal 100% stacked — mix phế phẩm từng tháng (%)</h3>
-    <div class="csub">Tháng nào có cấu trúc khác biệt so với baseline?</div>
+    <h3>Horizontal 100% stacked</h3>
     <div class="cw" style="height:260px"><canvas id="c-100pct"></canvas></div>
     <div class="ibox">T3–T6 có Materials cao hơn hẳn phần còn lại của năm. T12 gần như thuần animal feed (89.4%) — tháng có tỷ lệ circularity cao nhất.</div>
     <div class="pills">
@@ -226,48 +184,13 @@
     <h3>Reuse & Landfill theo tháng (kg)</h3>
     <div class="csub">Reuse = bụi cám tái dùng bồi hoàn; Landfill = gần zero toàn năm</div>
     <div class="cw" style="height:260px"><canvas id="c-reuse-lf"></canvas></div>
-    <div class="ibox amber">Reuse dao động 491–2,893 kg/tháng — không ổn định. Tháng 2 là tháng duy nhất ghi nhận landfill (19 kg) — cần trace nguyên nhân cụ thể.</div>
+    <div class="ibox amber">Reuse dao động 491–2,893 kg/tháng, không ổn định. Tháng 2 là tháng duy nhất ghi nhận landfill (19 kg).</div>
     <div class="pills">
       <span class="pill pg">Jan: Reuse cao nhất 2,893 kg</span>
       <span class="pill pr">Feb: 19 kg landfill duy nhất</span>
     </div>
   </div>
 
-</div>
-
-<!-- Recommendations: Cấu trúc -->
-<div class="card full" style="margin-top:14px">
-  <h3>💡 Recommendations — Cấu trúc & phân bổ phế phẩm</h3>
-  <div class="csub">Hành động cụ thể để tối ưu cơ cấu xử lý chất thải</div>
-  <table class="rec-tbl">
-    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Materials 16.2% toàn năm, đỉnh T3–T6</strong></td>
-        <td class="finding">Materials tăng vọt vào nửa đầu năm — trùng với chu kỳ thay đổi bao bì / packaging runs; T3 đạt 20.6% — cao nhất năm</td>
-        <td><span class="bge bga">Cần điều tra</span></td>
-        <td>Rà soát lịch sản xuất T3–T6 để xác định nguyên nhân Materials tăng; xem xét điều chỉnh lịch đặt hàng nguyên liệu bao bì để giảm excess; thiết lập target Materials ≤15% cho 2026</td>
-      </tr>
-      <tr>
-        <td><strong>Reuse không ổn định (491–2,893 kg)</strong></td>
-        <td class="finding">Biên độ dao động lớn 6x giữa tháng cao nhất và thấp nhất — chứng tỏ quy trình thu hồi bụi cám chưa được chuẩn hóa</td>
-        <td><span class="bge bga">Cần chuẩn hóa</span></td>
-        <td>Xây dựng SOP cho quy trình thu hồi và tái sử dụng bụi cám bồi hoàn; đặt mục tiêu Reuse tối thiểu 1,500 kg/tháng và theo dõi sát để giảm biến động</td>
-      </tr>
-      <tr>
-        <td><strong>Landfill 19 kg tháng 2</strong></td>
-        <td class="finding">Sự cố đơn lẻ duy nhất trong năm — cần hiểu nguyên nhân để đảm bảo không tái diễn</td>
-        <td><span class="bge bgb">Theo dõi</span></td>
-        <td>Điều tra nguồn gốc 19 kg landfill tháng 2; nếu do loại waste chưa có phương án xử lý, bổ sung vào danh mục tìm vendor xử lý có ích; đặt target landfill = 0 kg cho 2026</td>
-      </tr>
-      <tr>
-        <td><strong>T12: cấu trúc tốt nhất (89.4% animal feed)</strong></td>
-        <td class="finding">Tháng 12 có tỷ lệ animal feed cao nhất năm đồng thời materials thấp nhất — cấu trúc lý tưởng nhất</td>
-        <td><span class="bge bgg">Best practice</span></td>
-        <td>Phân tích điều kiện vận hành tháng 12 (lịch sản xuất, quy trình phân loại, nhà cung cấp thu gom) để xác định yếu tố tạo nên cấu trúc tối ưu này và nhân rộng sang các tháng khác</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
@@ -289,10 +212,10 @@
   </div>
 
   <div class="card">
-    <h3>Biến động tổng waste tháng-qua-tháng (%)</h3>
+    <h3>Biến động tổng waste qua từng tháng(%)</h3>
     <div class="csub">Phát hiện các tháng bất thường về khối lượng phế phẩm</div>
     <div class="cw" style="height:230px"><canvas id="c-mom"></canvas></div>
-    <div class="ibox amber">Feb→Mar tăng +51.5% — bất thường nhất năm. Apr→May giảm −32%. Cả hai cần giải thích từ production schedule.</div>
+    <div class="ibox amber">Feb→Mar tăng +51.5%. Apr→May giảm −32%. Cả hai cần giải thích từ production schedule.</div>
     <div class="pills">
       <span class="pill pr">Feb→Mar: +51.5%</span>
       <span class="pill pa">Apr→May: −32%</span>
@@ -306,140 +229,45 @@
 
   <div class="card">
     <h3>Waste tích lũy lũy kế cả năm (cumulative kg)</h3>
-    <div class="csub">Đường cong tăng trưởng — milestone quan trọng</div>
+    <div class="csub">Đường cong tăng trưởng</div>
     <div class="cw" style="height:230px"><canvas id="c-cum"></canvas></div>
-    <div class="ibox">H2 (Jul–Dec) đóng góp 54% tổng lượng — brewery chạy nặng hơn trong nửa cuối năm. Milestone 10M kg đạt vào tháng 7.</div>
+    <div class="ibox">Jul–Dec đóng góp 54% tổng lượng —> brewery chạy nặng hơn trong nửa cuối năm. Milestone 10M kg đạt vào tháng 7.</div>
     <div class="pills">
-      <span class="pill pgr">H1: 9.5M kg (46%)</span>
-      <span class="pill pg">H2: 11.1M kg (54%)</span>
+      <span class="pill pgr">H1 (Jan-June): 9.5M kg (46%)</span>
+      <span class="pill pg">H2 (Jul-Dec): 11.1M kg (54%)</span>
     </div>
   </div>
 
   <div class="card">
-    <h3>Tổng phế phẩm vs. Waste intensity — bubble chart</h3>
+    <h3>Tổng phế phẩm với Waste intensity (bubble chart)</h3>
     <div class="csub">Size bubble = tổng khối lượng; trục Y = intensity (kg/hl)</div>
     <div class="cw" style="height:230px"><canvas id="c-bubble"></canvas></div>
-    <div class="ibox blue">🎯 Sản lượng cao ≠ intensity cao. T12: volume lớn nhất nhưng intensity thấp thứ 2 (15.9). T3 và T11: volume lớn + intensity cao nhất — đây là 2 tháng cần tối ưu nhất.</div>
+    <div class="ibox blue">Sản lượng cao ≠ intensity cao. T12: volume lớn nhất nhưng intensity thấp thứ 2 (15.9). T3 và T11: volume lớn + intensity cao nhất —> đây là 2 tháng cần tối ưu nhất.</div>
     <div class="pills">
-      <span class="pill pg">Dec: best overall efficiency</span>
+      <span class="pill pg">Dec: efficient</span>
       <span class="pill pr">Nov: worst intensity (20.2)</span>
-      <span class="pill pa">Mar: high vol + high intensity</span>
     </div>
   </div>
 
-</div>
-
-<!-- Recommendations: Sản lượng & vận hành -->
-<div class="card full" style="margin-top:14px">
-  <h3>💡 Recommendations — Sản lượng & hiệu suất vận hành</h3>
-  <div class="csub">Tối ưu lịch sản xuất và giảm waste intensity vào các tháng cao điểm</div>
-  <table class="rec-tbl">
-    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Feb→Mar: +51.5% waste surge</strong></td>
-        <td class="finding">Tổng waste tăng đột ngột nhất năm — có thể liên quan đến restart sau Tết, bảo trì định kỳ, hoặc batch đặc biệt</td>
-        <td><span class="bge bga">Cần điều tra</span></td>
-        <td>Rà soát production log tháng 2–3 để xác định nguyên nhân spike; lên kế hoạch pre-Tet shutdown và startup protocol rõ ràng hơn để giảm waste phát sinh do restart không kiểm soát</td>
-      </tr>
-      <tr>
-        <td><strong>Apr→May: −32% waste drop</strong></td>
-        <td class="finding">Sụt giảm mạnh nhất năm — có thể do công suất sản xuất giảm hoặc cải tiến quy trình</td>
-        <td><span class="bge bgb">Theo dõi</span></td>
-        <td>Xác định nguyên nhân giảm sâu; nếu do cải tiến quy trình thì nhân rộng; nếu do giảm công suất thì lập kế hoạch dự phòng để ổn định nguồn phụ phẩm cho đối tác thu gom</td>
-      </tr>
-      <tr>
-        <td><strong>T3 và T11: high volume + high intensity</strong></td>
-        <td class="finding">2 tháng kém hiệu quả nhất — trùng với cao điểm sản xuất trước Tết (T3) và cuối năm (T11)</td>
-        <td><span class="bge bgr">Ưu tiên cao</span></td>
-        <td>Thực hiện Kaizen waste reduction tập trung vào T3 và T11; tăng cường bảo trì phòng ngừa trước các giai đoạn cao điểm; phân tích T7 (intensity 15.4) như benchmark để học hỏi</td>
-      </tr>
-      <tr>
-        <td><strong>T12: best efficiency (128k hl, intensity 15.9)</strong></td>
-        <td class="finding">Sản lượng cao nhất nhưng intensity chỉ 15.9 kg/hl — chứng minh scale-up không nhất thiết làm tăng intensity</td>
-        <td><span class="bge bgg">Best practice</span></td>
-        <td>Document process T12 làm baseline benchmark; đặt target intensity ≤16.5 kg/hl cho tất cả các tháng Q4 2026; áp dụng crew scheduling và raw material batching của T12 vào các tháng high-volume khác</td>
-      </tr>
-      <tr>
-        <td><strong>H2 chiếm 54% tổng waste</strong></td>
-        <td class="finding">Brewery chạy nặng hơn trong nửa cuối năm — tạo ra áp lực lớn hơn lên hệ thống xử lý chất thải</td>
-        <td><span class="bge bgb">Cần chuẩn bị</span></td>
-        <td>Lên kế hoạch capacity cho hệ thống thu gom và xử lý phế phẩm theo seasonality; đảm bảo hợp đồng với đối tác animal feed và combustion có buffer capacity cho các tháng Q4 peak</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
 <!-- SECTION 4: WASTE INTENSITY                     -->
 <!-- ═══════════════════════════════════════════════ -->
-<div class="sec">Waste intensity & phân tích theo quý</div>
+<div class="sec">Waste intensity</div>
 <div class="g2">
 
   <div class="card">
     <h3>Waste intensity theo tháng (kg/hl)</h3>
-    <div class="csub">Chỉ số hiệu quả sử dụng nguyên liệu — thấp hơn = tốt hơn</div>
+    <div class="csub">Chỉ số hiệu quả sử dụng nguyên liệu: thấp hơn = tốt hơn</div>
     <div class="cw" style="height:220px"><canvas id="c-intensity"></canvas></div>
-    <div class="ibox amber">T11 cao nhất (20.2 kg/hl) và T7 thấp nhất (15.4 kg/hl) — chênh lệch 4.8 kg/hl tương đương ~30% hiệu suất. Đây là dư địa cải thiện rõ ràng nhất.</div>
+    <div class="ibox amber">T11 cao nhất (20.2 kg/hl) và T7 thấp nhất (15.4 kg/hl).</div>
     <div class="pills">
       <span class="pill pr">T11: 20.2 kg/hl — worst</span>
       <span class="pill pg">T7: 15.4 kg/hl — best</span>
       <span class="pill pa">Avg: 17.7 kg/hl</span>
     </div>
   </div>
-
-  <div class="card">
-    <h3>So sánh cấu trúc phế phẩm theo quý — radar chart</h3>
-    <div class="csub">Mỗi quý nghiêng về dòng waste nào?</div>
-    <div class="leg">
-      <span><span class="ld" style="background:#1D9E75;border-radius:50%"></span>Q1</span>
-      <span><span class="ld" style="background:#378ADD;border-radius:50%"></span>Q2</span>
-      <span><span class="ld" style="background:#EF9F27;border-radius:50%"></span>Q3</span>
-      <span><span class="ld" style="background:#E24B4A;border-radius:50%"></span>Q4</span>
-    </div>
-    <div class="cw" style="height:280px"><canvas id="c-radar"></canvas></div>
-    <div class="ibox blue">Q1 và Q4 có profile gần giống nhau (cả hai đều có combustion w/o E cao hơn). Q2–Q3 nổi bật về Materials. Q4 có animal feed cao nhất.</div>
-    <div class="pills">
-      <span class="pill pb">Q1 &amp; Q4 profile tương đồng</span>
-      <span class="pill pa">Q2–Q3: Materials cao hơn rõ rệt</span>
-    </div>
-  </div>
-
-</div>
-
-<!-- Recommendations: Intensity -->
-<div class="card full" style="margin-top:14px">
-  <h3>💡 Recommendations — Waste intensity & phân tích theo quý</h3>
-  <div class="csub">Giảm intensity và tối ưu cấu trúc waste theo từng giai đoạn trong năm</div>
-  <table class="rec-tbl">
-    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>T11: intensity đỉnh 20.2 kg/hl</strong></td>
-        <td class="finding">Tháng 11 có waste intensity tồi nhất trong năm — cao hơn 31% so với T7 tốt nhất</td>
-        <td><span class="bge bgr">Ưu tiên cao</span></td>
-        <td>Điều tra quy trình vận hành T11: thiết bị xuống cấp? thay đổi nguyên liệu đầu vào? cường độ sản xuất không tối ưu? Xem xét preventive maintenance đặc biệt trước tháng 11 hàng năm</td>
-      </tr>
-      <tr>
-        <td><strong>T7: intensity tốt nhất 15.4 kg/hl</strong></td>
-        <td class="finding">Tháng 7 đạt hiệu quả vận hành tốt nhất — cần hiểu tại sao để nhân rộng</td>
-        <td><span class="bge bgg">Best practice</span></td>
-        <td>Phân tích chi tiết T7: lịch bảo trì, mix nguyên liệu, tốc độ dây chuyền, ca làm việc. Xây dựng "July playbook" áp dụng cho các tháng khác; đặt target cho Q1/2026 phải đạt intensity ≤16.5</td>
-      </tr>
-      <tr>
-        <td><strong>Q1 và Q4 có combustion w/o E cao hơn</strong></td>
-        <td class="finding">Radar chart cho thấy Q1 đặc biệt có combustion without energy cao — trước thời điểm chuyển đổi sang energy recovery từ T5</td>
-        <td><span class="bge bga">Cần cải thiện</span></td>
-        <td>Đảm bảo hợp đồng energy recovery được kích hoạt ngay từ tháng 1 năm sau (không còn gap T1–T4); review danh sách waste types trong Q1 và phân loại từng loại vào stream phù hợp sớm hơn</td>
-      </tr>
-      <tr>
-        <td><strong>Q2–Q3 có Materials cao hơn rõ rệt</strong></td>
-        <td class="finding">Seasonal pattern — Q2/Q3 consistently có tỷ lệ materials recovery cao hơn Q1/Q4</td>
-        <td><span class="bge bgb">Cơ hội</span></td>
-        <td>Tận dụng tính seasonal của Materials flow để lên lịch batch recycling tập trung vào Q2–Q3; đàm phán hợp đồng materials collection với giá tốt hơn cho giai đoạn này dựa trên khối lượng dự báo</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
@@ -468,7 +296,7 @@
     <h3>Tỷ lệ energy recovery trong combustion (%)</h3>
     <div class="csub">0% trước T5 → nhảy lên 95–98% từ T5 — cải tiến lớn nhất năm</div>
     <div class="cw" style="height:220px"><canvas id="c-eratio"></canvas></div>
-    <div class="ibox amber">T8 và T10 giảm nhẹ về 95.5% — cần kiểm tra liệu đây là seasonal fluctuation hay operational issue. T12 đạt 98.3% — cao nhất năm.</div>
+    <div class="ibox amber">T8 và T10 giảm nhẹ về 95.5%. T12 đạt 98.3%, cao nhất năm.</div>
     <div class="pills">
       <span class="pill pr">T1–T4: 0% (non-recovery)</span>
       <span class="pill pg">T12: 98.3% — đỉnh năm</span>
@@ -478,41 +306,6 @@
 
 </div>
 
-<!-- Recommendations: Combustion -->
-<div class="card full" style="margin-top:14px">
-  <h3>💡 Recommendations — Combustion & energy recovery</h3>
-  <div class="csub">Duy trì và nâng cao hiệu quả chuyển đổi năng lượng từ chất thải đốt</div>
-  <table class="rec-tbl">
-    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Gap T1–T4: 0% energy recovery</strong></td>
-        <td class="finding">4 tháng đầu năm toàn bộ combustion là non-energy recovery — tốn cơ hội thu hồi NL đáng kể</td>
-        <td><span class="bge bgr">Cần khắc phục</span></td>
-        <td>Ký hợp đồng đốt thu hồi năng lượng hiệu lực từ 01/01 cho năm tiếp theo; tránh để khoảng trống 4 tháng đầu năm như 2025; ước tính potential energy recovered nếu toàn năm đạt 97%</td>
-      </tr>
-      <tr>
-        <td><strong>Chuyển đổi từ T5 — thành công lớn</strong></td>
-        <td class="finding">Từ T5 đến T12, gần như 100% combustion có thu hồi NL — bước nhảy vọt từ 0% lên 96–98%</td>
-        <td><span class="bge bgg">Kết quả xuất sắc</span></td>
-        <td>Ghi nhận và report thành tích này trong HVN sustainability report; tính toán lượng CO₂ tương đương tiết kiệm được từ chuyển đổi này; xem xét mở rộng danh mục waste streams vào energy recovery</td>
-      </tr>
-      <tr>
-        <td><strong>T8 và T10 giảm xuống 95.5%</strong></td>
-        <td class="finding">2 điểm giảm nhỏ trong xu hướng tổng thể tốt — có thể do thay đổi vendor, loại waste, hoặc vấn đề vận hành cụ thể</td>
-        <td><span class="bge bgb">Theo dõi</span></td>
-        <td>Review waste composition và vendor performance cho T8 và T10; nếu do loại waste cụ thể không phù hợp với lò đốt, xem xét phân loại tách biệt; đặt target ≥97% cho tất cả các tháng từ T5 trở đi</td>
-      </tr>
-      <tr>
-        <td><strong>Combustion w/o E còn tồn tại từ packaging waste</strong></td>
-        <td class="finding">Nhãn, PET film, rác nguy hại (mực in, giẻ lau) vẫn đang đi vào combustion without energy — dù đang giảm dần</td>
-        <td><span class="bge bga">Cần chuyển đổi</span></td>
-        <td>Ưu tiên chuyển toàn bộ packaging waste (nhãn, PET film) sang lò đốt có thu hồi NL; với rác nguy hại, khảo sát khả năng sử dụng làm nguyên liệu gạch không nung theo đề xuất ISO 14K của nhà máy</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
 <!-- ═══════════════════════════════════════════════ -->
 <!-- SECTION 6: CIRCULARITY — ANIMAL FEED & NON-FEED-->
 <!-- ═══════════════════════════════════════════════ -->
@@ -520,10 +313,10 @@
 <div class="g2">
 
   <div class="card">
-    <h3>Animal feed % — xu hướng theo tháng</h3>
-    <div class="csub">Tỷ lệ animal feed biến động do thay đổi composition tổng waste</div>
+    <h3>Animal feed %</h3>
+    <div class="csub">Tỷ lệ animal feed biến động</div>
     <div class="cw" style="height:220px"><canvas id="c-aftrend"></canvas></div>
-    <div class="ibox">T12 đạt đỉnh 89.4% — tháng tốt nhất về circularity. T6 đáy 76.6% — trùng với tháng non-feed cao nhất. Xu hướng tổng thể ổn định trong biên 76–90%.</div>
+    <div class="ibox">T12 đạt đỉnh 89.4%, tháng tốt nhất về circularity. T6 đáy 76.6%, trùng với tháng non-feed cao nhất. Xu hướng tổng thể ổn định trong biên 76–90%.</div>
     <div class="pills">
       <span class="pill pg">T12: 89.4% — đỉnh</span>
       <span class="pill pa">T6: 76.6% — đáy</span>
@@ -533,63 +326,24 @@
 
   <div class="card">
     <h3>Non-feed waste % theo tháng</h3>
-    <div class="csub">Phần trăm chất thải không được xử lý theo hướng thức ăn chăn nuôi — cơ hội cho upcycling thêm</div>
+    <div class="csub">Phần trăm chất thải không được xử lý theo hướng thức ăn chăn nuôi</div>
     <div class="cw" style="height:220px"><canvas id="c-nonfeed"></canvas></div>
-    <div class="ibox amber">T6 có non-feed cao nhất (23.4%), T12 thấp nhất (10.6%). Tháng có non-feed cao = tháng có nhiều materials và combustion thải ra nhất — cơ hội upcycle lớn nhất.</div>
+    <div class="ibox amber">T6 có non-feed cao nhất (23.4%), T12 thấp nhất (10.6%).</div>
     <div class="pills">
       <span class="pill pr">T6: 23.4% non-feed — đỉnh</span>
-      <span class="pill pg">T12: 10.6% non-feed — tốt nhất</span>
+      <span class="pill pg">T12: 10.6% non-feed - thấp nhất</span>
       <span class="pill pa">Avg: ~17.8% non-feed</span>
     </div>
   </div>
 
 </div>
 
-<!-- Recommendations: Circularity -->
-<div class="card full" style="margin-top:14px">
-  <h3>💡 Recommendations — Circularity streams</h3>
-  <div class="csub">Nâng cao giá trị circularity từ animal feed và các dòng non-feed</div>
-  <table class="rec-tbl">
-    <thead><tr><th>Insight</th><th>Phát hiện</th><th>Mức độ</th><th>Khuyến nghị</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Animal feed 82.2% — ổn định nhưng giá trị thấp</strong></td>
-        <td class="finding">Bã malt, bã men, cám — hiện đang bán làm thức ăn gia súc truyền thống với giá trị tương đối thấp</td>
-        <td><span class="bge bgb">Cơ hội nâng cấp</span></td>
-        <td>Pilot BSF (Black Soldier Fly) farming với 10–20% khối lượng bã men/malt; protein côn trùng có giá trị cao hơn 3–5x; khảo sát đối tác BSF farming tại miền Bắc Việt Nam có thể tiếp nhận nguyên liệu từ nhà máy</td>
-      </tr>
-      <tr>
-        <td><strong>Non-feed đỉnh T6: 23.4%</strong></td>
-        <td class="finding">Tháng 6 là tháng có cơ hội upcycle lớn nhất nhưng cũng là tháng xử lý kém hiệu quả nhất về circularity</td>
-        <td><span class="bge bga">Cần cải thiện</span></td>
-        <td>Lập kế hoạch upcycle riêng cho tháng 6: tăng tần suất thu gom materials, đảm bảo đủ capacity lò đốt thu hồi NL; đặt mục tiêu non-feed ≤18% cho T6 của 2026</td>
-      </tr>
-      <tr>
-        <td><strong>Spent kieselguhr (bột trợ lọc)</strong></td>
-        <td class="finding">Hiện làm gạch — nhưng còn cơ hội compost hoặc vật liệu xây dựng không nung theo ISO 14K</td>
-        <td><span class="bge bgb">Cơ hội</span></td>
-        <td>Đánh giá feasibility gạch không nung từ spent kieselguhr kết hợp với bùn WWTP; nếu scale được, có thể tạo thêm một dòng circular material mới với giá trị cao hơn và carbon footprint thấp hơn gạch nung</td>
-      </tr>
-      <tr>
-        <td><strong>Bùn thải WWTP (aerobic sludge)</strong></td>
-        <td class="finding">Hiện làm phân bón compost — là phương án tốt nhưng còn có thể kết hợp thêm</td>
-        <td><span class="bge bgg">Đang tốt</span></td>
-        <td>Duy trì hệ thống compost phân bón hiện tại; nghiên cứu thêm khả năng kết hợp bùn WWTP + spent kieselguhr làm nguyên liệu gạch không nung để giảm volume cần compost và tăng giá trị đầu ra</td>
-      </tr>
-      <tr>
-        <td><strong>Can-to-can / returnable packaging</strong></td>
-        <td class="finding">Lon thải, stretch film, carton, pallet gỗ hiện bán phế liệu — chưa có closed-loop circularity</td>
-        <td><span class="bge bgb">Cơ hội</span></td>
-        <td>Tiếp cận nhà cung cấp bao bì để thí điểm returnable packaging program; phối hợp với HVN central để đánh giá can-to-can circularity scheme nhằm giảm materials waste và tạo dòng giá trị mới</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
 
 <!-- FOOTER -->
 <div class="ftr">
-  <span>HEINEKEN Vietnam – Hanoi Brewery · Waste & Co-product Report 2025 · Tổng hợp từ dữ liệu nội bộ HVN</span>
-  <span>Generated June 2025 · Data source: HVNHN Internal waste tracking system</span>
+  <span>HEINEKEN VIETNAM – Hanoi Brewery · Waste & Co-product Report 2025 · Tổng hợp từ dữ liệu nội bộ HVNHN</span>
+  <span>Generated June 2025</span>
 </div>
 
 </div><!-- /page -->
